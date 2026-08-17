@@ -1,0 +1,21 @@
+---
+import { getCollection, render } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+export const prerender = true;
+export async function getStaticPaths() {
+  const items = await getCollection('articles');
+  return items.map((article) => ({ params: { id: article.id }, props: { article } }));
+}
+const { article } = Astro.props;
+const { Content } = await render(article);
+---
+<SiteLayout title={article.data.title} description={article.data.summary} active="news">
+  <div class="page-shell breadcrumb"><a href="/">首页</a><span>›</span><a href="/news/">新闻公告</a><span>›</span><span>{article.data.category}</span></div>
+  <article class="article-detail page-shell">
+    <header><span class="detail-category">{article.data.category}</span><h1>{article.data.title}</h1><div class="detail-meta"><time datetime={article.data.date}>{article.data.date}</time><span>东莞城市学院图书馆</span></div><p class="lead">{article.data.summary}</p></header>
+    {article.data.cover && <img class="detail-cover" src={article.data.cover} alt="" />}
+    <div class="prose"><Content /></div>
+    {article.data.sourceUrl && <p class="legacy-source">原文存档：<a href={article.data.sourceUrl}>查看旧站页面</a></p>}
+    <a class="back-link" href="/news/"><span class="material-symbols-outlined">arrow_back</span>返回新闻公告</a>
+  </article>
+</SiteLayout>

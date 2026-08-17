@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import InnerHero from '../../components/InnerHero.astro';
+const allArticles = (await getCollection('articles')).sort((a, b) => b.data.date.localeCompare(a.data.date));
+const pageSize = 20;
+const totalPages = Math.ceil(allArticles.length / pageSize);
+const page = Math.min(Math.max(Number(Astro.url.searchParams.get('page') || 1), 1), totalPages);
+const articles = allArticles.slice((page - 1) * pageSize, page * pageSize);
+const categories = ['全部', ...new Set(allArticles.map((item) => item.data.category))];
+---
+<SiteLayout title="新闻公告" description="图书馆新闻、通知与活动信息" active="news">
+  <InnerHero eyebrow="NEWS & NOTICES" title="新闻公告" description="及时了解图书馆开放安排、资源动态、阅读活动与服务通知。" icon="newspaper" />
+  <section class="inner-section page-shell">
+    <div class="list-toolbar"><div class="filter-bar" aria-label="按栏目筛选">{categories.map((category, index) => <button class:list={{ active: index === 0 }} data-filter={category}>{category}</button>)}</div><p>共 {allArticles.length} 篇内容</p></div>
+    <div class="article-list" data-filter-list>
+      {articles.map((article) => <article class="article-row" data-category={article.data.category}>
+        <div class="date-block"><strong>{article.data.date.slice(8, 10)}</strong><span>{article.data.date.slice(0, 7)}</span></div>
+        <div class="article-copy"><div class="meta"><span>{article.data.category}</span>{article.data.featured && <b>推荐</b>}</div><h2><a href={`/news/${article.id}/`}>{article.data.title}</a></h2><p>{article.data.summary}</p></div>
+        <a class="row-arrow" href={`/news/${article.id}/`} aria-label={`查看${article.data.title}`}><span class="material-symbols-outlined">arrow_forward</span></a>
+      </article>)}
+    </div>
+    <nav class="pagination" aria-label="新闻分页">
+      {page > 1 ? <a href={`/news/?page=${page - 1}`}>上一页</a> : <span>上一页</span>}
+      <strong>{page} / {totalPages}</strong>
+      {page < totalPages ? <a href={`/news/?page=${page + 1}`}>下一页</a> : <span>下一页</span>}
+    </nav>
+  </section>
+  <script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+    const rows = document.querySelectorAll<HTMLElement>('[data-category]');
+    buttons.forEach((button) => button.addEventListener('click', () => {
+      buttons.forEach((item) => item.classList.remove('active')); button.classList.add('active');
+      rows.forEach((row) => { row.hidden = button.dataset.filter !== '全部' && row.dataset.category !== button.dataset.filter; });
+    }));
+  </script>
+</SiteLayout>

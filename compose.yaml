@@ -1,0 +1,13 @@
+services:
+  library:
+    build:
+      context: .
+      args:
+        PUBLIC_KEYSTATIC_GITHUB_REPO: ${PUBLIC_KEYSTATIC_GITHUB_REPO:-}
+    image: dgcu-library:latest
+    restart: unless-stopped
+    env_file:
+      - path: .env.production
+        required: false
+    ports:
+      - "4321:4321"

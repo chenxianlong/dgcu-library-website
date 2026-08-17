@@ -1,0 +1,362 @@
+{
+  "generatedAt": "2026-08-17T01:26:37.178Z",
+  "scannedListPages": 187,
+  "discoveredTitles": 127,
+  "repaired": 16,
+  "repairs": [
+    {
+      "id": "291",
+      "from": "东莞城市学院图书馆",
+      "to": "中心概况",
+      "file": "legacy-291.mdoc"
+    },
+    {
+      "id": "292",
+      "from": "东莞城市学院图书馆",
+      "to": "馆藏分布",
+      "file": "legacy-292.mdoc"
+    },
+    {
+      "id": "296",
+      "from": "东莞城市学院图书馆",
+      "to": "开放时间",
+      "file": "legacy-296.mdoc"
+    },
+    {
+      "id": "512",
+      "from": "东莞城市学院图书馆",
+      "to": "图书馆风景",
+      "file": "legacy-512.mdoc"
+    },
+    {
+      "id": "513",
+      "from": "东莞城市学院图书馆",
+      "to": "图书馆风景",
+      "file": "legacy-513.mdoc"
+    },
+    {
+      "id": "514",
+      "from": "东莞城市学院图书馆",
+      "to": "图书馆风景",
+      "file": "legacy-514.mdoc"
+    },
+    {
+      "id": "515",
+      "from": "东莞城市学院图书馆",
+      "to": "图书馆风景",
+      "file": "legacy-515.mdoc"
+    },
+    {
+      "id": "516",
+      "from": "东莞城市学院图书馆",
+      "to": "图书馆风景",
+      "file": "legacy-516.mdoc"
+    },
+    {
+      "id": "517",
+      "from": "东莞城市学院图书馆",
+      "to": "部门设置",
+      "file": "legacy-517.mdoc"
+    },
+    {
+      "id": "519",
+      "from": "东莞城市学院图书馆",
+      "to": "开放时间",
+      "file": "legacy-519.mdoc"
+    },
+    {
+      "id": "520",
+      "from": "东莞城市学院图书馆",
+      "to": "借阅规则",
+      "file": "legacy-520.mdoc"
+    },
+    {
+      "id": "521",
+      "from": "东莞城市学院图书馆",
+      "to": "图书馆微信",
+      "file": "legacy-521.mdoc"
+    },
+    {
+      "id": "525",
+      "from": "东莞城市学院图书馆",
+      "to": "联系我们",
+      "file": "legacy-525.mdoc"
+    },
+    {
+      "id": "528",
+      "from": "东莞城市学院图书馆",
+      "to": "馆藏资源",
+      "file": "legacy-528.mdoc"
+    },
+    {
+      "id": "529",
+      "from": "东莞城市学院图书馆",
+      "to": "电子资源",
+      "file": "legacy-529.mdoc"
+    },
+    {
+      "id": "536",
+      "from": "东莞城市学院图书馆",
+      "to": "中心概况",
+      "file": "legacy-536.mdoc"
+    }
+  ],
+  "failures": [
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=262&page=0&SortPath=0,209,262,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=260&page=1&SortPath=0,209,260,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=261&page=0&SortPath=0,209,261,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=262&page=-1&SortPath=0,209,262,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=260&page=2&SortPath=0,209,260,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=274&page=2&SortPath=0,241,274,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=273&page=1&SortPath=0,241,273,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=273&page=0&SortPath=0,241,273,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=209&page=3&SortPath=0,209,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=273&page=-1&SortPath=0,241,273,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=274&page=0&SortPath=0,241,274,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=209&page=1&SortPath=0,209,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=274&page=1&SortPath=0,241,274,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=276&page=2&SortPath=0,241,276,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=276&page=1&SortPath=0,241,276,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=277&page=1&SortPath=0,241,277,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=278&page=2&SortPath=0,241,278,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=277&page=-1&SortPath=0,241,277,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=276&page=0&SortPath=0,241,276,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=278&page=0&SortPath=0,241,278,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=277&page=0&SortPath=0,241,277,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=253&page=3&SortPath=0,105,253,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=279&page=1&SortPath=0,241,279,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=253&page=8&SortPath=0,105,253,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=278&page=1&SortPath=0,241,278,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=279&page=0&SortPath=0,241,279,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=253&page=1&SortPath=0,105,253,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=253&page=6&SortPath=0,105,253,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=279&page=2&SortPath=0,241,279,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=105&page=4&SortPath=0,105,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=31&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=253&page=4&SortPath=0,105,253,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=4&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=105&page=6&SortPath=0,105,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=253&page=5&SortPath=0,105,253,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=263&page=3&SortPath=0,209,263,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=263&page=1&SortPath=0,209,263,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=28&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=5&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=29&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=105&page=5&SortPath=0,105,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=7&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=30&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=8&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=6&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=11&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=10&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=24&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=9&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=25&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=12&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=26&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=27&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=13&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=14&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=22&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=20&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=23&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=21&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=16&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=15&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=18&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=19&SortPath=0,247,280,",
+      "error": "fetch failed"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/NewsList.asp?SortID=280&page=17&SortPath=0,247,280,",
+      "error": "fetch failed"
+    }
+  ]
+}

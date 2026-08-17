@@ -1,0 +1,16 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import InnerHero from '../../components/InnerHero.astro';
+const groups = [
+  { id:'borrow', icon:'menu_book', title:'借阅服务', text:'查询借阅状态、办理续借，了解借阅权限、逾期处理及图书遗失赔偿规则。', links:['馆藏检索','借阅规则','图书续借','读者荐购'] },
+  { id:'remote', icon:'shield_lock', title:'校外访问', text:'通过学校统一身份认证，在校外安全访问图书馆订购的数字资源。', links:['VPN 使用指南','校外访问说明','常见问题'] },
+  { id:'space', icon:'meeting_room', title:'空间服务', text:'预约研讨室、学习空间与多媒体设施，查看各楼层功能与实时开放信息。', links:['空间预约','楼层导览','开放时间'] },
+  { id:'learning', icon:'school', title:'学习支持', text:'面向新生、课程学习与科研需求，提供培训、信息素养和专题咨询。', links:['新生指南','数据库培训','考试资源','学科服务'] },
+  { id:'reference', icon:'support_agent', title:'咨询与参考', text:'遇到检索、资源使用或论文查收查引问题，可通过线上线下渠道获得帮助。', links:['在线咨询','常见问题','联系我们'] },
+  { id:'account', icon:'account_circle', title:'我的图书馆', text:'集中管理个人借阅、预约、收藏和消息提醒。', links:['登录账户','借阅记录','预约记录'] },
+];
+---
+<SiteLayout title="读者服务" description="图书馆借阅、空间、学习与咨询服务" active="services">
+  <InnerHero eyebrow="READER SERVICES" title="读者服务" description="围绕借、读、学、研的全过程，为师生提供清晰便捷的服务入口。" icon="support_agent" />
+  <section class="inner-section page-shell"><div class="service-cards">{groups.map((group) => <article class="service-card" id={group.id}><span class="material-symbols-outlined">{group.icon}</span><h2>{group.title}</h2><p>{group.text}</p><ul>{group.links.map((link) => <li><a href="#"><span>{link}</span><span aria-hidden="true">›</span></a></li>)}</ul></article>)}</div></section>
+</SiteLayout>

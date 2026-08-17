@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import InnerHero from '../../components/InnerHero.astro';
+const resources = (await getCollection('resources')).sort((a, b) => Number(b.data.featured) - Number(a.data.featured));
+const categories = ['全部', ...new Set(resources.map((item) => item.data.category))];
+---
+<SiteLayout title="资源发现" description="数据库、电子图书与开放学术资源" active="resources">
+  <InnerHero eyebrow="DISCOVER RESOURCES" title="资源发现" description="一站式发现中外文数据库、电子图书、考试学习与开放获取资源。" icon="database" />
+  <section class="inner-section page-shell">
+    <div class="resource-search"><span class="material-symbols-outlined">search</span><input type="search" placeholder="搜索数据库或资源名称" aria-label="搜索资源" /></div>
+    <div class="filter-bar" aria-label="资源分类">{categories.map((category, index) => <button class:list={{ active: index === 0 }} data-resource-filter={category}>{category}</button>)}</div>
+    <div class="resource-cards" data-resource-list>{resources.map((resource) => <article class="resource-card" data-category={resource.data.category} data-name={resource.data.name.toLowerCase()}>
+      <div class="resource-card-head"><span class="material-symbols-outlined">library_books</span><span class:list={['access-pill', resource.data.access === '公开' && 'open']}>{resource.data.access}</span></div>
+      <span class="resource-category">{resource.data.category}</span><h2>{resource.data.name}</h2><p>{resource.data.description}</p>
+      <a href={resource.data.url}>访问资源<span class="material-symbols-outlined">open_in_new</span></a>
+    </article>)}</div>
+  </section>
+  <script>
+    const input = document.querySelector<HTMLInputElement>('.resource-search input');
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-resource-filter]');
+    const cards = document.querySelectorAll<HTMLElement>('.resource-card');
+    let category = '全部';
+    const update = () => cards.forEach((card) => { const matchesCategory = category === '全部' || card.dataset.category === category; const matchesSearch = (card.dataset.name || '').includes((input?.value || '').trim().toLowerCase()); card.hidden = !matchesCategory || !matchesSearch; });
+    buttons.forEach((button) => button.addEventListener('click', () => { category = button.dataset.resourceFilter || '全部'; buttons.forEach((item) => item.classList.remove('active')); button.classList.add('active'); update(); }));
+    input?.addEventListener('input', update);
+  </script>
+</SiteLayout>

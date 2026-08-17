@@ -1,0 +1,10 @@
+node_modules
+dist
+.astro
+.git
+.env*
+*.png
+!public/**/*.png
+migration
+design-qa.md
+npm-debug.log*

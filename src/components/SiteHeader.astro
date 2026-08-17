@@ -1,0 +1,34 @@
+---
+const { active = '' } = Astro.props;
+const nav = [
+  ['home', '首页', '/'], ['resources', '资源发现', '/resources/'], ['services', '读者服务', '/services/'],
+  ['spaces', '空间服务', '/services/#space'], ['learning', '学习支持', '/services/#learning'],
+  ['news', '新闻公告', '/news/'], ['about', '关于本馆', '/about/'],
+];
+---
+<header class="site-header">
+  <div class="header-inner page-shell">
+    <a class="brand" href="/" aria-label="东莞城市学院图书馆首页">
+      <span class="brand-lockup"><img src="/images/library-logo-lockup.png" alt="东莞城市学院图书馆 DONGGUAN CITY UNIVERSITY LIBRARY" /></span>
+    </a>
+    <div class="utility-links" aria-label="实用链接">
+      <a href="https://dgcu.edu.cn"><span class="material-symbols-outlined">language</span>学校官网</a>
+      <a href="/about/#hours"><span class="material-symbols-outlined">schedule</span>开放时间</a>
+      <a href="/services/#remote"><span class="material-symbols-outlined">verified_user</span>校外访问</a>
+    </div>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="打开导航"><span class="material-symbols-outlined">menu</span></button>
+  </div>
+  <nav class="main-nav" id="main-nav" aria-label="主导航"><div class="page-shell nav-inner">
+    {nav.map(([key, label, href]) => <a class:list={{ active: active === key }} href={href}>{label}</a>)}
+  </div></nav>
+</header>
+<script>
+  const button = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('#main-nav');
+  button?.addEventListener('click', () => {
+    const open = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!open));
+    button.setAttribute('aria-label', open ? '打开导航' : '关闭导航');
+    nav?.classList.toggle('open', !open);
+  });
+</script>

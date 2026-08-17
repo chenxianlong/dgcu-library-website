@@ -1,0 +1,223 @@
+---
+import '../styles/global.css';
+
+const services = [
+  { icon: 'account_circle', title: '我的图书馆', detail: '账户 / 借阅 / 预约', href: '/services/#account' },
+  { icon: 'menu_book', title: '借阅续借', detail: '借书 / 续借 / 归还', href: '/services/#borrow' },
+  { icon: 'shield_lock', title: '校外访问', detail: 'VPN / 远程访问', href: '/services/#remote' },
+  { icon: 'calendar_month', title: '空间预约', detail: '研讨室 / 自习室预约', href: '/services/#space' },
+  { icon: 'map', title: '馆藏分布', detail: '馆藏位置 / 楼层导航', href: '/about/' },
+  { icon: 'support_agent', title: '咨询帮助', detail: '常见问题 / 联系我们', href: '/services/#reference' },
+];
+
+const notices = [
+  ['2026-08-12', '关于2026年暑期图书馆开放安排的通知'],
+  ['2026-08-08', '图书馆关于开通试用数据库的通知'],
+  ['2026-08-05', '关于暑假期间图书馆座位预约规则的说明'],
+  ['2026-08-01', '读者座位预约系统使用指南'],
+  ['2026-07-28', '“书香莞城·阅读打卡”活动获奖名单公布'],
+];
+
+const resources = [
+  ['中国知网（CNKI）', '校内'], ['万方数据知识服务平台', '校内'],
+  ['读秀学术搜索', '校内'], ['Web of Science', 'VPN'],
+  ['超星发现', '校内'], ['Emerald 电子期刊', 'VPN'],
+  ['CNKI AI 学术研究助手', '校内'], ['国家图书馆数字资源', '公开'],
+];
+
+const learning = [
+  { icon: 'school', title: '新生指南', detail: '入馆指引与使用攻略' },
+  { icon: 'quiz', title: '考试题库', detail: '考研考证备考资源' },
+  { icon: 'play_circle', title: 'MOOC资源', detail: '精品课程在线学习' },
+  { icon: 'library_books', title: '数据库培训', detail: '讲座与培训报名' },
+];
+
+const news = [
+  { image: '/images/news-anniversary.jpg', title: '东莞城市学院建校20周年庆典活动隆重举行', date: '2026-08-10' },
+  { image: '/images/news-ai-education.jpg', title: '“数字赋能·文脉焕新”美育教育研讨会', date: '2026-08-06' },
+  { image: '/images/news-campus.jpg', title: '图书馆举办第二届“读书月”系列活动', date: '2026-04-23' },
+  { image: '/images/library-campus.jpg', title: '图书馆空间焕新，阅读体验再升级', date: '2026-04-10' },
+];
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="东莞城市学院图书馆门户网站，提供馆藏检索、电子资源、借阅服务、空间预约与图书馆资讯。" />
+    <meta name="theme-color" content="#0b683f" />
+    <title>东莞城市学院图书馆</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <header class="site-header">
+      <div class="header-inner page-shell">
+        <a class="brand" href="#top" aria-label="东莞城市学院图书馆首页">
+          <span class="brand-lockup"><img src="/images/library-logo-lockup.png" alt="东莞城市学院图书馆 DONGGUAN CITY UNIVERSITY LIBRARY" /></span>
+        </a>
+        <div class="utility-links" aria-label="实用链接">
+          <a href="https://dgcu.edu.cn"><span class="material-symbols-outlined">language</span>学校官网</a>
+          <a href="/about/#hours"><span class="material-symbols-outlined">schedule</span>开放时间</a>
+          <a href="/services/#remote"><span class="material-symbols-outlined">verified_user</span>校外访问</a>
+        </div>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="打开导航">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+      <nav class="main-nav" id="main-nav" aria-label="主导航">
+        <div class="page-shell nav-inner">
+          <a class="active" href="/">首页</a>
+          <a href="/resources/">资源发现</a>
+          <a href="/services/">读者服务</a>
+          <a href="/services/#space">空间服务</a>
+          <a href="/services/#learning">学习支持</a>
+          <a href="/news/">新闻公告</a>
+          <a href="/about/">关于本馆</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="page-shell hero-inner">
+          <div class="hero-search-area">
+            <h1>从这里，找到你需要的知识</h1>
+            <div class="search-module" data-search-module>
+              <div class="search-tabs" role="tablist" aria-label="搜索范围">
+                <button class="active" type="button" role="tab" aria-selected="true" data-search-type="馆藏">馆藏</button>
+                <button type="button" role="tab" aria-selected="false" data-search-type="数据库">数据库</button>
+                <button type="button" role="tab" aria-selected="false" data-search-type="论文">论文</button>
+                <button type="button" role="tab" aria-selected="false" data-search-type="站内">站内</button>
+              </div>
+              <form class="search-form" novalidate>
+                <label class="sr-only" for="library-search">搜索馆藏</label>
+                <input id="library-search" name="q" type="search" placeholder="请输入关键词，如书名、作者、主题词、ISBN/ISSN等" autocomplete="off" />
+                <button type="submit"><span class="material-symbols-outlined">search</span>检索</button>
+              </form>
+              <div class="search-shortcuts" aria-label="热门资源">
+                <span>快捷入口：</span>
+                <a href="https://www.cnki.net/">中国知网</a>
+                <a href="http://www.duxiu.com/">读秀</a>
+                <a href="https://ai.cnki.net/">CNKI AI</a>
+                <a href="https://www.zhizhen.com/">超星发现</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="services page-shell" id="services" aria-labelledby="services-title">
+        <h2 class="sr-only" id="services-title">常用服务</h2>
+        <div class="service-grid">
+          {services.map((service) => (
+            <a class="service-item" href={service.href}>
+              <span class="material-symbols-outlined service-icon" aria-hidden="true">{service.icon}</span>
+              <span><strong>{service.title}</strong><small>{service.detail}</small></span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="info-grid page-shell" aria-label="今日服务、通知与资源">
+        <article class="panel hours-panel" id="hours">
+          <h2><span class="material-symbols-outlined">schedule</span>今日服务</h2>
+          <div class="hours">08:00–22:00</div>
+          <p class="open-status"><span></span>正常开放</p>
+          <p class="muted">服务地点：图书馆各服务区域</p>
+          <a class="outline-button" href="#footer"><span class="material-symbols-outlined">calendar_today</span>查看更多开放时间</a>
+        </article>
+
+        <article class="panel notice-panel" id="news">
+          <div class="panel-heading"><h2><span class="material-symbols-outlined">campaign</span>最新通知</h2><a href="/news/">更多 <span aria-hidden="true">›</span></a></div>
+          <ul class="notice-list">
+            {notices.map(([date, title]) => <li><time datetime={date}>{date}</time><a href="/news/">{title}</a></li>)}
+          </ul>
+        </article>
+
+        <article class="panel resource-panel" id="resources">
+          <div class="panel-heading"><h2><span class="material-symbols-outlined">layers</span>常用资源</h2><a href="/resources/">更多 <span aria-hidden="true">›</span></a></div>
+          <ul class="resource-list">
+            {resources.map(([name, access]) => <li><a href="/resources/">{name}</a><span class:list={['access-tag', access === '公开' && 'public']}>{access}</span></li>)}
+          </ul>
+        </article>
+      </section>
+
+      <section class="lower-grid page-shell">
+        <article class="panel learning-panel" id="learning">
+          <h2><span class="material-symbols-outlined">school</span>新生与学习支持</h2>
+          <div class="learning-grid">
+            {learning.map((item) => (
+              <a href="/services/#learning">
+                <span class="material-symbols-outlined">{item.icon}</span>
+                <span><strong>{item.title}</strong><small>{item.detail}</small></span>
+              </a>
+            ))}
+          </div>
+        </article>
+
+        <article class="panel news-panel">
+          <div class="panel-heading"><h2><span class="material-symbols-outlined">newspaper</span>新闻与活动</h2><a href="/news/">更多 <span aria-hidden="true">›</span></a></div>
+          <div class="news-grid">
+            {news.map((item) => (
+              <a class="news-card" href="/news/">
+                <img src={item.image} alt="" loading="lazy" />
+                <span><strong>{item.title}</strong><time datetime={item.date}>{item.date}</time></span>
+              </a>
+            ))}
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="footer">
+      <div class="page-shell footer-grid">
+        <div class="footer-brand">
+          <img src="/images/school-seal.png" alt="" width="58" height="58" />
+          <div><strong>东莞城市学院图书馆</strong><p>地址：广东省东莞市寮步镇文昌路1号（523419）</p><p>电话：0769-23382676　邮箱：library@dgcu.edu.cn</p></div>
+        </div>
+        <div class="footer-links"><strong>快速链接</strong><a href="https://dgcu.edu.cn">学校官网</a><a href="#footer">教务处</a><a href="#footer">信息化中心</a></div>
+        <div class="footer-links"><strong>网站地图</strong><a href="#resources">资源发现</a><a href="#services">读者服务</a><a href="#news">新闻公告</a></div>
+        <div class="qr-block"><strong>关注我们</strong><img src="/images/library-wechat.jpg" alt="图书馆微信公众号二维码" /></div>
+      </div>
+      <div class="copyright">Copyright © 2014–2026 东莞城市学院图书馆. All Rights Reserved.</div>
+    </footer>
+
+    <div class="toast" role="status" aria-live="polite" hidden></div>
+    <script>
+      const menuButton = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('#main-nav');
+      menuButton?.addEventListener('click', () => {
+        const open = menuButton.getAttribute('aria-expanded') === 'true';
+        menuButton.setAttribute('aria-expanded', String(!open));
+        menuButton.setAttribute('aria-label', open ? '打开导航' : '关闭导航');
+        nav?.classList.toggle('open', !open);
+      });
+
+      const tabs = [...document.querySelectorAll('[data-search-type]')];
+      const searchInput = document.querySelector('#library-search');
+      tabs.forEach((tab) => tab.addEventListener('click', () => {
+        tabs.forEach((item) => { item.classList.remove('active'); item.setAttribute('aria-selected', 'false'); });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        if (searchInput instanceof HTMLInputElement) searchInput.placeholder = `在${tab.dataset.searchType}中输入关键词`;
+      }));
+
+      const form = document.querySelector('.search-form');
+      const toast = document.querySelector('.toast');
+      form?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const query = searchInput instanceof HTMLInputElement ? searchInput.value.trim() : '';
+        if (!query) {
+          searchInput?.focus();
+          if (toast instanceof HTMLElement) { toast.textContent = '请输入检索关键词'; toast.hidden = false; }
+        } else if (toast instanceof HTMLElement) {
+          const active = document.querySelector('[data-search-type].active');
+          toast.textContent = `正在${active?.textContent?.trim() || '馆藏'}中检索“${query}”`;
+          toast.hidden = false;
+        }
+        window.setTimeout(() => { if (toast instanceof HTMLElement) toast.hidden = true; }, 2800);
+      });
+    </script>
+  </body>
+</html>

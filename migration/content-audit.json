@@ -1,0 +1,695 @@
+{
+  "generatedAt": "2026-08-17T01:28:15.277Z",
+  "counts": {
+    "totalArticles": 494,
+    "legacyArticles": 489,
+    "localAssets": 779,
+    "suspiciousTitles": 5,
+    "shortBodies": 38,
+    "unknownDates": 0,
+    "duplicateTitles": 21,
+    "missingLocalAssets": 0,
+    "remainingRemoteAssetReferences": 83,
+    "uniqueFailedExternalAssets": 64,
+    "malformedDiscoveredLinks": 6
+  },
+  "failedHosts": [
+    [
+      "www.gdwht.gov.cn",
+      55
+    ],
+    [
+      "www.lib.dgut.edu.cn",
+      8
+    ],
+    [
+      "github.com",
+      1
+    ]
+  ],
+  "suspicious": [
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-281.mdoc",
+      "title": "东莞城市学院图书馆",
+      "date": "2014-10-15",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": true
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-284.mdoc",
+      "title": "东莞城市学院图书馆",
+      "date": "2014-10-15",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": true
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-378.mdoc",
+      "title": "东莞城市学院图书馆",
+      "date": "2017-07-05",
+      "bodyLength": 670,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": true
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-388.mdoc",
+      "title": "东莞城市学院图书馆",
+      "date": "2018-04-02",
+      "bodyLength": 473,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": true
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-749.mdoc",
+      "title": "东莞城市学院图书馆",
+      "date": "2025-11-03",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": true
+    }
+  ],
+  "shortBodies": [
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-280.mdoc",
+      "title": "优阅外文数字图书馆",
+      "date": "2014-10-15",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-281.mdoc",
+      "title": "东莞城市学院图书馆",
+      "date": "2014-10-15",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": true
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-282.mdoc",
+      "title": "银符考试题库(本地)",
+      "date": "2014-10-15",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-283.mdoc",
+      "title": "超星数字图书",
+      "date": "2014-10-15",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-284.mdoc",
+      "title": "东莞城市学院图书馆",
+      "date": "2014-10-15",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": true
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-285.mdoc",
+      "title": "中国知网(CNKI)",
+      "date": "2014-10-15",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-286.mdoc",
+      "title": "外网访问校内资源",
+      "date": "2014-11-06",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-290.mdoc",
+      "title": "新东方多媒体学习库",
+      "date": "2014-11-17",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-316.mdoc",
+      "title": "两岸关系数据库",
+      "date": "2015-03-30",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-326.mdoc",
+      "title": "空中英语试用",
+      "date": "2015-04-14",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-392.mdoc",
+      "title": "银符考试题库全库包库（远程）",
+      "date": "2018-04-10",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-395.mdoc",
+      "title": "读秀全文检索",
+      "date": "2018-06-27",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-440.mdoc",
+      "title": "【放假通知】关于2020年元旦图书馆开放安排的通知",
+      "date": "2019-12-23",
+      "bodyLength": 47,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-447.mdoc",
+      "title": "银符考试题库（本地）",
+      "date": "2020-04-14",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-448.mdoc",
+      "title": "MET全民英语资源库",
+      "date": "2020-04-14",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-458.mdoc",
+      "title": "【开馆通知】关于学生返校后调整开放服务方案的通知",
+      "date": "2020-09-02",
+      "bodyLength": 47,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-476.mdoc",
+      "title": "【活动通知】2021年“4.23”全民阅读签名活动",
+      "date": "2021-04-22",
+      "bodyLength": 47,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-477.mdoc",
+      "title": "【活动通知】中国知网·学科快报 免费试用，有奖调研",
+      "date": "2021-04-22",
+      "bodyLength": 47,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-488.mdoc",
+      "title": "【放假通知】关于中秋节图书馆开放安排的通知",
+      "date": "2021-09-15",
+      "bodyLength": 47,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-512.mdoc",
+      "title": "图书馆风景",
+      "date": "2022-04-12",
+      "bodyLength": 47,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-513.mdoc",
+      "title": "图书馆风景",
+      "date": "2022-04-12",
+      "bodyLength": 47,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-514.mdoc",
+      "title": "图书馆风景",
+      "date": "2022-04-12",
+      "bodyLength": 47,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-515.mdoc",
+      "title": "图书馆风景",
+      "date": "2022-04-12",
+      "bodyLength": 47,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-516.mdoc",
+      "title": "图书馆风景",
+      "date": "2022-04-12",
+      "bodyLength": 47,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-517.mdoc",
+      "title": "部门设置",
+      "date": "2022-04-14",
+      "bodyLength": 47,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-524.mdoc",
+      "title": "各系部资料室图书登记流程",
+      "date": "2022-04-22",
+      "bodyLength": 47,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-525.mdoc",
+      "title": "联系我们",
+      "date": "2022-04-22",
+      "bodyLength": 22,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-686.mdoc",
+      "title": "【通知公告】图书馆关于全面清理个人物品的通知",
+      "date": "2025-01-02",
+      "bodyLength": 47,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-745.mdoc",
+      "title": "哲学社会科学主文献平台",
+      "date": "2025-10-24",
+      "bodyLength": 37,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-746.mdoc",
+      "title": "哲学社会科学预印本平台",
+      "date": "2025-10-24",
+      "bodyLength": 37,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-747.mdoc",
+      "title": "超星发现系统",
+      "date": "2025-10-31",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-749.mdoc",
+      "title": "东莞城市学院图书馆",
+      "date": "2025-11-03",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": true
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-751.mdoc",
+      "title": "新东方多媒体学习库",
+      "date": "2025-11-07",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-753.mdoc",
+      "title": "CNKI AI",
+      "date": "2025-11-11",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-784.mdoc",
+      "title": "中国共产党思想理论资源数据库",
+      "date": "2026-04-09",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-785.mdoc",
+      "title": "人民邮电出版社电子书平台",
+      "date": "2026-04-09",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-786.mdoc",
+      "title": "人大复印报刊资料全文数据库",
+      "date": "2026-04-09",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    },
+    {
+      "file": "src\\content\\articles\\legacy\\legacy-790.mdoc",
+      "title": "知阅在线电子书平台",
+      "date": "2026-04-16",
+      "bodyLength": 0,
+      "legacy": true,
+      "remoteAssets": [],
+      "suspiciousTitle": false
+    }
+  ],
+  "unknownDates": [],
+  "duplicateTitles": [
+    {
+      "title": "东莞城市学院图书馆",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-281.mdoc",
+        "src\\content\\articles\\legacy\\legacy-284.mdoc",
+        "src\\content\\articles\\legacy\\legacy-378.mdoc",
+        "src\\content\\articles\\legacy\\legacy-388.mdoc",
+        "src\\content\\articles\\legacy\\legacy-749.mdoc"
+      ]
+    },
+    {
+      "title": "万方数据知识服务平台",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-288.mdoc",
+        "src\\content\\articles\\legacy\\legacy-608.mdoc",
+        "src\\content\\articles\\legacy\\legacy-667.mdoc"
+      ]
+    },
+    {
+      "title": "新东方多媒体学习库",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-290.mdoc",
+        "src\\content\\articles\\legacy\\legacy-675.mdoc",
+        "src\\content\\articles\\legacy\\legacy-751.mdoc"
+      ]
+    },
+    {
+      "title": "中心概况",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-291.mdoc",
+        "src\\content\\articles\\legacy\\legacy-536.mdoc"
+      ]
+    },
+    {
+      "title": "开放时间",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-296.mdoc",
+        "src\\content\\articles\\legacy\\legacy-519.mdoc"
+      ]
+    },
+    {
+      "title": "自助借还操作流程",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-299.mdoc",
+        "src\\content\\articles\\legacy\\legacy-530.mdoc"
+      ]
+    },
+    {
+      "title": "关于清明节图书馆开放安排的通知",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-386.mdoc",
+        "src\\content\\articles\\legacy\\legacy-411.mdoc"
+      ]
+    },
+    {
+      "title": "【放假通知】关于劳动节图书馆开放安排的通知",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-418.mdoc",
+        "src\\content\\articles\\legacy\\legacy-479.mdoc"
+      ]
+    },
+    {
+      "title": "【放假通知】关于国庆节图书馆开放安排的通知",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-432.mdoc",
+        "src\\content\\articles\\legacy\\legacy-489.mdoc"
+      ]
+    },
+    {
+      "title": "中国共产党思想理论资源数据库",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-486.mdoc",
+        "src\\content\\articles\\legacy\\legacy-784.mdoc"
+      ]
+    },
+    {
+      "title": "图书馆风景",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-512.mdoc",
+        "src\\content\\articles\\legacy\\legacy-513.mdoc",
+        "src\\content\\articles\\legacy\\legacy-514.mdoc",
+        "src\\content\\articles\\legacy\\legacy-515.mdoc",
+        "src\\content\\articles\\legacy\\legacy-516.mdoc"
+      ]
+    },
+    {
+      "title": "【通知公告】关于国庆节图书馆开放安排的通知",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-568.mdoc",
+        "src\\content\\articles\\legacy\\legacy-668.mdoc"
+      ]
+    },
+    {
+      "title": "【通知公告】图书馆关于全面清理个人物品的通知",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-632.mdoc",
+        "src\\content\\articles\\legacy\\legacy-686.mdoc",
+        "src\\content\\articles\\legacy\\legacy-726.mdoc",
+        "src\\content\\articles\\legacy\\legacy-772.mdoc",
+        "src\\content\\articles\\legacy\\legacy-799.mdoc"
+      ]
+    },
+    {
+      "title": "阅途美育在线",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-659.mdoc",
+        "src\\content\\articles\\legacy\\legacy-740.mdoc"
+      ]
+    },
+    {
+      "title": "设计师之家数字图书馆",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-661.mdoc",
+        "src\\content\\articles\\legacy\\legacy-738.mdoc"
+      ]
+    },
+    {
+      "title": "【通知公告】关于调整图书馆开放时间的通知",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-687.mdoc",
+        "src\\content\\articles\\legacy\\legacy-727.mdoc",
+        "src\\content\\articles\\legacy\\legacy-774.mdoc"
+      ]
+    },
+    {
+      "title": "【通知公告】关于图书馆寒假期间开放时间的通知",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-689.mdoc",
+        "src\\content\\articles\\legacy\\legacy-775.mdoc"
+      ]
+    },
+    {
+      "title": "【通知公告】关于清明节图书馆开放安排的通知",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-700.mdoc",
+        "src\\content\\articles\\legacy\\legacy-780.mdoc"
+      ]
+    },
+    {
+      "title": "【通知公告】关于劳动节图书馆开放安排的通知",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-713.mdoc",
+        "src\\content\\articles\\legacy\\legacy-793.mdoc"
+      ]
+    },
+    {
+      "title": "【通知公告】关于端午节图书馆开放安排的通知",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-720.mdoc",
+        "src\\content\\articles\\legacy\\legacy-798.mdoc"
+      ]
+    },
+    {
+      "title": "【通知公告】关于图书馆暑假期间开放时间的通知",
+      "files": [
+        "src\\content\\articles\\legacy\\legacy-728.mdoc",
+        "src\\content\\articles\\legacy\\legacy-802.mdoc"
+      ]
+    }
+  ],
+  "localMissing": [],
+  "remainingRemoteAssetReferences": [
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-311/59dd62301867.doc",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-311/d26f81392da7.doc",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-311/29150dd2a39c.doc",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-312/44c46d85c745.xls",
+    "http://www.lib.dgut.edu.cn/plus/img/addon.gif",
+    "http://www.lib.dgut.edu.cn/uploads/soft/130505/2012-2013CSSCI%E6%9D%A5%E6%BA%90%E6%9C%9F%E5%88%8A%E7%9B%AE%E5%BD%95.pdf",
+    "http://www.lib.dgut.edu.cn/uploads/soft/130505/2009%E7%89%88%E4%B8%AD%E5%9B%BD%E7%A7%91%E6%8A%80%E8%AE%BA%E6%96%87%E7%BB%9F%E8%AE%A1%E6%BA%90%E6%9C%9F%E5%88%8A%E5%88%97%E8%A1%A8.xls",
+    "http://www.lib.dgut.edu.cn/uploads/soft/130505/EI%E6%9D%A5%E6%BA%90%E6%9C%9F%E5%88%8A_2010.pdf",
+    "http://www.lib.dgut.edu.cn/uploads/soft/130505/SCI%E6%94%B6%E5%BD%95%E7%9A%84%E4%B8%AD%E5%9B%BD%E6%9C%9F%E5%88%8A.xls",
+    "http://www.lib.dgut.edu.cn/uploads/soft/130505/WebofScience-SCIE,SSCI,A&HCI%E6%94%B6%E5%BD%95%E6%9C%9F%E5%88%8A%EF%BC%882010%E5%B9%B4%EF%BC%89.doc",
+    "http://www.lib.dgut.edu.cn/uploads/soft/130505/%E4%B8%AD%E5%9B%BD%E7%A7%91%E5%AD%A6%E5%BC%95%E6%96%87%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9D%A5%E6%BA%90%E6%9C%9F%E5%88%8A%E5%88%97%E8%A1%A8%EF%BC%882009-2010%EF%BC%89.pdf",
+    "http://www.lib.dgut.edu.cn/uploads/soft/130505/%E4%B8%AD%E6%96%87%E6%A0%B8%E5%BF%83%E6%9C%9F%E5%88%8A%E8%A6%81%E7%9B%AE%E5%8C%97%E5%A4%A72012.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526110834.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526111016.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20120910153358.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526114913.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110601101821.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526142807.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526142949.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20120910151426.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526143233.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110601102420.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526143621.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526143743.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20120910153450.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526144950.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110601103104.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526145246.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526145359.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526145524.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20120215105329.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526145755.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526145859.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526150029.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526150133.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526150253.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526150427.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526150544.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526150702.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526150806.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526150915.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526151020.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526151124.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526151235.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110526151456.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527102652.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527102807.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527102925.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527103036.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527103146.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527103249.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527103357.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527103622.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527103727.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527103828.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527103941.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527104047.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527104150.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527104347.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527104456.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527104628.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527104739.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527104840.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527105248.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527105406.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527105601.doc",
+    "http://www.gdwht.gov.cn/UserFilesF/20110527105655.doc",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-322/7089d1a691cc.ppt",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-323/0a37a829e820.ppt",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-324/074f0d60eb53.ppt",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-327/d2bdb0779871.doc",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-335/c70a7c89a531.doc",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-339/94230138fcaf.docx",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-347/3f160958661d.pdf",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-352/db0ce7b986d9.pdf",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-391/b38338fc8ef3.docx",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-431/52951751bcca.docx",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-445/471da9ea548c.ppt",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-475/89eebc92263c.doc",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-487/37ceec0cdad0.docx",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-531/191a3e5e3ef9.ppt",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-532/d099e783687c.ppt",
+    "http://lib.dgcu.edu.cn/legacy-assets/legacy-624/678c47aed9a9.zip"
+  ],
+  "malformedDiscoveredLinks": [
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/library.koolearn.com",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/jt.xinyulib.com.cn",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/2025%E6%95%B0%E5%AD%97%E4%B8%AD%E5%9B%BD%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B%C2%B7%E6%95%B0%E6%8D%AE%E8%A6%81%E7%B4%A0%E8%B5%9B%E9%81%93%E6%AD%A3%E5%BC%8F%E4%B8%8A%E7%BA%BF%EF%BC%81%E2%86%92https://mp.weixin.qq.com/s/R4k4KCzKguB2TbPlnfUZEw",
+      "error": "HTTP 400"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/%E3%80%8A%E5%9B%BD%E9%99%85%E5%9B%BE%E8%81%94%E6%88%98%E7%95%A52024-2029%E3%80%8B%E5%8E%9F%E6%96%87%EF%BC%9Ahttps://repository.ifla.org/items/300159c9-9973-433e-9ad5-3e69f4ea4832",
+      "error": "HTTP 400"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/%E3%80%8A%E5%9B%BD%E9%99%85%E5%9B%BE%E8%81%94%E6%88%98%E7%95%A52024-2029%E3%80%8B%E4%B8%AD%E6%96%87%E7%89%88%EF%BC%9Ahttps://repository.ifla.org/items/dbd4556f-abb4-4861-8d0a-f1661e86a832",
+      "error": "HTTP 400"
+    },
+    {
+      "url": "http://lib.dgcu.edu.cn/webfile/%E3%80%8A%E5%9B%BD%E9%99%85%E5%9B%BE%E8%81%94%E8%B6%8B%E5%8A%BF%E6%8A%A5%E5%91%8A2024%E3%80%8B%E5%8E%9F%E6%96%87%EF%BC%9Ahttps://repository.ifla.org/items/ae4dfcc0-8def-4318-8c4c-7f0507d15609",
+      "error": "HTTP 400"
+    }
+  ]
+}
