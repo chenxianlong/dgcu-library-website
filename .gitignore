@@ -3,6 +3,10 @@ dist/
 # generated types
 .astro/
 
+# runtime database and uploads
+data/
+public/uploads/admin/
+
 # dependencies
 node_modules/
 

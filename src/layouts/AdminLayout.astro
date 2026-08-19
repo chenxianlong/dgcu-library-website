@@ -1,0 +1,46 @@
+---
+import '../styles/admin.css';
+const { title, active = '' } = Astro.props;
+const admin = Astro.locals.admin;
+const csrfToken = Astro.locals.csrfToken;
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#0b683f" />
+    <link rel="icon" href="/images/favicon.ico" type="image/png" />
+    <title>{title}｜图书馆内容后台</title>
+  </head>
+  <body class="admin-body">
+    <header class="admin-header">
+      <a class="admin-brand" href="/admin/">
+        <img src="/images/school-seal.png" alt="东莞城市学院校徽" />
+        <strong>东莞城市学院图书馆<small>DONGGUAN CITY UNIVERSITY LIBRARY</small></strong>
+        <span>内容管理</span>
+      </a>
+      <div class="admin-account">
+        <span><b>{admin?.displayName}</b><small>{admin?.username}</small></span>
+        <form method="post" action="/admin/api/logout">
+          <input type="hidden" name="csrf" value={csrfToken} />
+          <button type="submit">退出登录</button>
+        </form>
+      </div>
+    </header>
+    <div class="admin-frame">
+      <aside class="admin-sidebar" aria-label="后台导航">
+        <nav>
+          <a class:list={{ active: active === 'dashboard' }} href="/admin/"><span class="material-symbols-outlined">dashboard</span>工作台</a>
+          <a class:list={{ active: active === 'articles' }} href="/admin/articles/"><span class="material-symbols-outlined">newspaper</span>新闻与公告</a>
+          <a class:list={{ active: active === 'resources' }} href="/admin/resources/"><span class="material-symbols-outlined">database</span>电子资源</a>
+          <a class:list={{ active: active === 'service-hours' }} href="/admin/service-hours/"><span class="material-symbols-outlined">schedule</span>开放时间</a>
+          <a class:list={{ active: active === 'account' }} href="/admin/account/"><span class="material-symbols-outlined">manage_accounts</span>账号安全</a>
+        </nav>
+        <a class="view-site" href="/" target="_blank"><span class="material-symbols-outlined">open_in_new</span>查看网站</a>
+      </aside>
+      <main class="admin-main"><slot /></main>
+    </div>
+  </body>
+</html>

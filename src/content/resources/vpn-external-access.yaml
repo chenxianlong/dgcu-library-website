@@ -1,0 +1,6 @@
+name: 外网访问校内资源
+description: 在校外访问图书馆校内数字资源的服务入口。
+url: https://vpn.ccdgut.edu.cn
+category: 开放资源
+access: 公开
+featured: false
