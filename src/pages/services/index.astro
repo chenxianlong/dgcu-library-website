@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import InnerHero from '../../components/InnerHero.astro';
+const vpnGuideUrl = 'https://open.work.weixin.qq.com/wwopen/mpnews?mixuin=nrkvDgAABwBpkJBEAAAUAA&mfid=WW0310-nHwr3wAABwDsiLamd4UFxw5VuEn5c&idx=0&sn=7c333b35c664fc6de2eb9f730e1089f6&version=5.0.10.6015&platform=win';
 const groups = [
   { id:'borrow', icon:'menu_book', title:'借阅服务', text:'查询借阅状态、办理续借，了解借阅权限、逾期处理及图书遗失赔偿规则。', links:['馆藏检索','借阅规则','图书续借','读者荐购'] },
   { id:'remote', icon:'shield_lock', title:'校外访问', text:'通过学校统一身份认证，在校外安全访问图书馆订购的数字资源。', links:['VPN 使用指南','校外访问说明','常见问题'] },
@@ -12,5 +13,5 @@ const groups = [
 ---
 <SiteLayout title="读者服务" description="图书馆借阅、空间、学习与咨询服务" active="services">
   <InnerHero eyebrow="READER SERVICES" title="读者服务" description="围绕借、读、学、研的全过程，为师生提供清晰便捷的服务入口。" icon="support_agent" />
-  <section class="inner-section page-shell"><div class="service-cards">{groups.map((group) => <article class="service-card" id={group.id}><span class="material-symbols-outlined">{group.icon}</span><h2>{group.title}</h2><p>{group.text}</p><ul>{group.links.map((link) => <li><a href="#"><span>{link}</span><span aria-hidden="true">›</span></a></li>)}</ul></article>)}</div></section>
+  <section class="inner-section page-shell"><div class="service-cards">{groups.map((group) => <article class="service-card" id={group.id}><span class="material-symbols-outlined">{group.icon}</span><h2>{group.title}</h2><p>{group.text}</p><ul>{group.links.map((link) => <li><a href={group.id === 'remote' && link === 'VPN 使用指南' ? vpnGuideUrl : '#'}><span>{link}</span><span aria-hidden="true">›</span></a></li>)}</ul></article>)}</div></section>
 </SiteLayout>

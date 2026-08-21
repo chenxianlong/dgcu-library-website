@@ -1,0 +1,33 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { getArticle } from '../../../lib/server/content';
+const id = Astro.params.id || 'new';
+const isNew = id === 'new';
+const article = isNew ? null : getArticle(id, true);
+if (!isNew && !article) return Astro.redirect('/admin/articles/');
+const error = Astro.url.searchParams.get('error');
+---
+<AdminLayout title={isNew ? '新建内容' : '编辑内容'} active="articles">
+  <div class="page-title"><div><h1>{isNew ? '新建新闻与公告' : '编辑新闻与公告'}</h1><p>正文支持 Markdown 标题、列表、链接和图片语法。</p></div><a class="secondary-button" href="/admin/articles/">返回列表</a></div>
+  {error && <p class="form-message form-error">保存失败，请检查标题、日期、摘要和正文。</p>}
+  <form class="edit-form" method="post" action="/admin/api/articles/save" enctype="multipart/form-data">
+    <input type="hidden" name="csrf" value={Astro.locals.csrfToken} /><input type="hidden" name="originalId" value={article?.id || ''} />
+    <div class="form-main"><section class="form-card"><h2>内容信息</h2>
+      <div class="field"><label for="title">标题</label><input id="title" name="title" value={article?.title || ''} required /></div>
+      <div class="field"><label for="summary">摘要</label><textarea id="summary" name="summary" required>{article?.summary || ''}</textarea></div>
+      <div class="field"><label for="content">正文</label><textarea class="editor" id="content" name="content" required>{article?.content || ''}</textarea><small>支持 Markdown。上传正文图片后，系统会自动把图片添加到正文末尾。</small></div>
+      <div class="field"><label for="contentImages">正文图片</label><input id="contentImages" name="contentImages" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple /><small>每张不超过 10MB，可一次选择多张。</small></div>
+    </section></div>
+    <aside class="form-side"><section class="form-card"><h2>发布设置</h2>
+      <div class="field"><label for="date">发布日期</label><input id="date" name="date" type="date" value={article?.date || new Date().toISOString().slice(0,10)} required /></div>
+      <div class="field"><label for="category">栏目</label><select id="category" name="category">{['通知公告','新闻动态','活动预告','获奖通知'].map(value=><option value={value} selected={article?.category===value}>{value}</option>)}</select></div>
+      <div class="field"><label for="status">状态</label><select id="status" name="status">{[['published','发布'],['draft','草稿'],['archived','归档']].map(([value,label])=><option value={value} selected={(article?.status || 'published')===value}>{label}</option>)}</select></div>
+      <label class="check-field"><input type="checkbox" name="featured" checked={article?.featured} />首页推荐</label>
+    </section><section class="form-card"><h2>扩展信息</h2>
+      <div class="field"><label for="cover">封面图片路径</label><input id="cover" name="cover" value={article?.cover || ''} placeholder="/images/example.jpg" /></div>
+      <div class="field"><label for="coverFile">上传新封面</label><input id="coverFile" name="coverFile" type="file" accept="image/jpeg,image/png,image/webp,image/gif" /><small>上传后将替换上面的路径。</small></div>
+      <div class="field"><label for="sourceUrl">原始页面地址</label><input id="sourceUrl" name="sourceUrl" type="url" value={article?.sourceUrl || ''} /></div>
+      <div class="field"><label for="legacyId">旧站内容 ID</label><input id="legacyId" name="legacyId" value={article?.legacyId || ''} /></div>
+    </section><div class="form-actions"><button class="primary-button" type="submit"><span class="material-symbols-outlined">save</span>保存内容</button></div></aside>
+  </form>
+</AdminLayout>

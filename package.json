@@ -11,6 +11,10 @@
     "preview": "astro preview",
     "astro": "astro",
     "audit:content": "node scripts/audit-content.mjs",
+    "db:migrate": "node scripts/migrate-content-to-sqlite.mjs",
+    "db:repair-dates": "node scripts/repair-database-dates.mjs",
+    "db:export-public": "node scripts/export-public-database.mjs",
+    "admin:create": "node scripts/create-admin.mjs",
     "repair:metadata": "node scripts/repair-legacy-metadata.mjs",
     "migrate:sample": "node scripts/migrate-legacy.mjs --limit=80",
     "migrate:legacy": "node scripts/migrate-legacy.mjs --download-assets"
@@ -20,16 +24,22 @@
     "@astrojs/node": "^11.1.2",
     "@astrojs/react": "^6.0.2",
     "@fontsource/noto-sans-sc": "^5.3.0",
-    "@keystatic/astro": "^5.2.0",
-    "@keystatic/core": "^0.6.5",
+    "@markdoc/markdoc": "^0.5.9",
     "@material-symbols/font-400": "^0.46.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "astro": "^7.2.2",
     "cheerio": "^1.2.0",
+    "gray-matter": "^4.0.3",
     "iconv-lite": "^0.7.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "turndown": "^7.2.4"
+    "turndown": "^7.2.4",
+    "yaml": "^2.9.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/node": "^26.2.0",
+    "typescript": "^6.0.3"
   }
 }
