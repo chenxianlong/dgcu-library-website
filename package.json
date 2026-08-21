@@ -13,6 +13,7 @@
     "audit:content": "node scripts/audit-content.mjs",
     "db:migrate": "node scripts/migrate-content-to-sqlite.mjs",
     "db:repair-dates": "node scripts/repair-database-dates.mjs",
+    "db:export-public": "node scripts/export-public-database.mjs",
     "admin:create": "node scripts/create-admin.mjs",
     "repair:metadata": "node scripts/repair-legacy-metadata.mjs",
     "migrate:sample": "node scripts/migrate-legacy.mjs --limit=80",
