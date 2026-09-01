@@ -1,29 +1,21 @@
 ---
 import '../styles/global.css';
+import { listArticles, listResources } from '../lib/server/content';
+import { getServiceHours } from '../lib/server/settings';
 
 const services = [
-  { icon: 'account_circle', title: '我的图书馆', detail: '账户 / 借阅 / 预约', href: '/services/#account' },
-  { icon: 'menu_book', title: '借阅续借', detail: '借书 / 续借 / 归还', href: '/services/#borrow' },
+  { icon: 'account_circle', title: '我的图书馆', detail: '账户 / 借阅 / 预约', href: 'http://10.20.208.253/opac/reader/space' },
+  { icon: 'menu_book', title: '借阅续借', detail: '借书 / 续借 / 归还', href: 'http://10.20.208.253/opac/reader/space' },
   { icon: 'shield_lock', title: '校外访问', detail: 'VPN / 远程访问', href: '/services/#remote' },
   { icon: 'calendar_month', title: '空间预约', detail: '研讨室 / 自习室预约', href: '/services/#space' },
   { icon: 'map', title: '馆藏分布', detail: '馆藏位置 / 楼层导航', href: '/about/' },
   { icon: 'support_agent', title: '咨询帮助', detail: '常见问题 / 联系我们', href: '/services/#reference' },
 ];
 
-const notices = [
-  ['2026-08-12', '关于2026年暑期图书馆开放安排的通知'],
-  ['2026-08-08', '图书馆关于开通试用数据库的通知'],
-  ['2026-08-05', '关于暑假期间图书馆座位预约规则的说明'],
-  ['2026-08-01', '读者座位预约系统使用指南'],
-  ['2026-07-28', '“书香莞城·阅读打卡”活动获奖名单公布'],
-];
-
-const resources = [
-  ['中国知网（CNKI）', '校内'], ['万方数据知识服务平台', '校内'],
-  ['读秀学术搜索', '校内'], ['Web of Science', 'VPN'],
-  ['超星发现', '校内'], ['Emerald 电子期刊', 'VPN'],
-  ['CNKI AI 学术研究助手', '校内'], ['国家图书馆数字资源', '公开'],
-];
+const latestArticles = listArticles({ limit: 8 });
+const notices = latestArticles.slice(0, 5);
+const resources = listResources().slice(0, 8);
+const serviceHours = getServiceHours();
 
 const learning = [
   { icon: 'school', title: '新生指南', detail: '入馆指引与使用攻略' },
@@ -32,12 +24,8 @@ const learning = [
   { icon: 'library_books', title: '数据库培训', detail: '讲座与培训报名' },
 ];
 
-const news = [
-  { image: '/images/news-anniversary.jpg', title: '东莞城市学院建校20周年庆典活动隆重举行', date: '2026-08-10' },
-  { image: '/images/news-ai-education.jpg', title: '“数字赋能·文脉焕新”美育教育研讨会', date: '2026-08-06' },
-  { image: '/images/news-campus.jpg', title: '图书馆举办第二届“读书月”系列活动', date: '2026-04-23' },
-  { image: '/images/library-campus.jpg', title: '图书馆空间焕新，阅读体验再升级', date: '2026-04-10' },
-];
+const newsFallbacks = ['/images/news-anniversary.jpg','/images/news-ai-education.jpg','/images/news-campus.jpg','/images/library-campus.jpg'];
+const news = latestArticles.slice(0,4).map((article,index)=>({ ...article, image: article.cover || newsFallbacks[index] }));
 ---
 
 <!doctype html>
@@ -47,6 +35,7 @@ const news = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="东莞城市学院图书馆门户网站，提供馆藏检索、电子资源、借阅服务、空间预约与图书馆资讯。" />
     <meta name="theme-color" content="#0b683f" />
+    <link rel="icon" href="/images/favicon.ico" type="image/png" />
     <title>东莞城市学院图书馆</title>
   </head>
   <body>
@@ -68,12 +57,12 @@ const news = [
       <nav class="main-nav" id="main-nav" aria-label="主导航">
         <div class="page-shell nav-inner">
           <a class="active" href="/">首页</a>
-          <a href="/resources/">资源发现</a>
+          <a href="/news/">新闻公告</a>
+          <a href="/about/">关于本馆</a>
+          <a href="/resources/">电子资源</a>
           <a href="/services/">读者服务</a>
           <a href="/services/#space">空间服务</a>
           <a href="/services/#learning">学习支持</a>
-          <a href="/news/">新闻公告</a>
-          <a href="/about/">关于本馆</a>
         </div>
       </nav>
     </header>
@@ -90,9 +79,9 @@ const news = [
                 <button type="button" role="tab" aria-selected="false" data-search-type="论文">论文</button>
                 <button type="button" role="tab" aria-selected="false" data-search-type="站内">站内</button>
               </div>
-              <form class="search-form" novalidate>
+              <form class="search-form" action="/opac-search" method="get">
                 <label class="sr-only" for="library-search">搜索馆藏</label>
-                <input id="library-search" name="q" type="search" placeholder="请输入关键词，如书名、作者、主题词、ISBN/ISSN等" autocomplete="off" />
+                <input id="library-search" name="q" type="search" placeholder="请输入关键词，如书名、作者、主题词、ISBN/ISSN等" autocomplete="off" required />
                 <button type="submit"><span class="material-symbols-outlined">search</span>检索</button>
               </form>
               <div class="search-shortcuts" aria-label="热门资源">
@@ -122,23 +111,23 @@ const news = [
       <section class="info-grid page-shell" aria-label="今日服务、通知与资源">
         <article class="panel hours-panel" id="hours">
           <h2><span class="material-symbols-outlined">schedule</span>今日服务</h2>
-          <div class="hours">08:00–22:00</div>
-          <p class="open-status"><span></span>正常开放</p>
-          <p class="muted">服务地点：图书馆各服务区域</p>
-          <a class="outline-button" href="#footer"><span class="material-symbols-outlined">calendar_today</span>查看更多开放时间</a>
+          <div class="hours">{serviceHours.display}</div>
+          <p class:list={['open-status', serviceHours.status]}><span></span>{serviceHours.statusText}</p>
+          {serviceHours.note && <p class="muted">{serviceHours.note}</p>}
+          <a class="outline-button" href={serviceHours.detailUrl}><span class="material-symbols-outlined">calendar_today</span>查看开放安排</a>
         </article>
 
         <article class="panel notice-panel" id="news">
           <div class="panel-heading"><h2><span class="material-symbols-outlined">campaign</span>最新通知</h2><a href="/news/">更多 <span aria-hidden="true">›</span></a></div>
           <ul class="notice-list">
-            {notices.map(([date, title]) => <li><time datetime={date}>{date}</time><a href="/news/">{title}</a></li>)}
+            {notices.map((item) => <li><time datetime={item.date}>{item.date}</time><a href={`/news/${item.id}/`}>{item.title}</a></li>)}
           </ul>
         </article>
 
         <article class="panel resource-panel" id="resources">
-          <div class="panel-heading"><h2><span class="material-symbols-outlined">layers</span>常用资源</h2><a href="/resources/">更多 <span aria-hidden="true">›</span></a></div>
+          <div class="panel-heading"><h2><span class="material-symbols-outlined">layers</span>电子资源</h2><a href="/resources/">更多 <span aria-hidden="true">›</span></a></div>
           <ul class="resource-list">
-            {resources.map(([name, access]) => <li><a href="/resources/">{name}</a><span class:list={['access-tag', access === '公开' && 'public']}>{access}</span></li>)}
+            {resources.map((item) => <li><a href={item.url}>{item.name}</a><span class:list={['access-tag', item.access === '公开' && 'public']}>{item.access}</span></li>)}
           </ul>
         </article>
       </section>
@@ -160,7 +149,7 @@ const news = [
           <div class="panel-heading"><h2><span class="material-symbols-outlined">newspaper</span>新闻与活动</h2><a href="/news/">更多 <span aria-hidden="true">›</span></a></div>
           <div class="news-grid">
             {news.map((item) => (
-              <a class="news-card" href="/news/">
+              <a class="news-card" href={`/news/${item.id}/`}>
                 <img src={item.image} alt="" loading="lazy" />
                 <span><strong>{item.title}</strong><time datetime={item.date}>{item.date}</time></span>
               </a>
@@ -177,13 +166,12 @@ const news = [
           <div><strong>东莞城市学院图书馆</strong><p>地址：广东省东莞市寮步镇文昌路1号（523419）</p><p>电话：0769-23382676　邮箱：library@dgcu.edu.cn</p></div>
         </div>
         <div class="footer-links"><strong>快速链接</strong><a href="https://dgcu.edu.cn">学校官网</a><a href="#footer">教务处</a><a href="#footer">信息化中心</a></div>
-        <div class="footer-links"><strong>网站地图</strong><a href="#resources">资源发现</a><a href="#services">读者服务</a><a href="#news">新闻公告</a></div>
+        <div class="footer-links"><strong>网站地图</strong><a href="#resources">电子资源</a><a href="#services">读者服务</a><a href="#news">新闻公告</a></div>
         <div class="qr-block"><strong>关注我们</strong><img src="/images/library-wechat.jpg" alt="图书馆微信公众号二维码" /></div>
       </div>
       <div class="copyright">Copyright © 2014–2026 东莞城市学院图书馆. All Rights Reserved.</div>
     </footer>
 
-    <div class="toast" role="status" aria-live="polite" hidden></div>
     <script>
       const menuButton = document.querySelector('.menu-toggle');
       const nav = document.querySelector('#main-nav');
@@ -194,8 +182,8 @@ const news = [
         nav?.classList.toggle('open', !open);
       });
 
-      const tabs = [...document.querySelectorAll('[data-search-type]')];
-      const searchInput = document.querySelector('#library-search');
+      const tabs = [...document.querySelectorAll<HTMLButtonElement>('[data-search-type]')];
+      const searchInput = document.querySelector<HTMLInputElement>('#library-search');
       tabs.forEach((tab) => tab.addEventListener('click', () => {
         tabs.forEach((item) => { item.classList.remove('active'); item.setAttribute('aria-selected', 'false'); });
         tab.classList.add('active');
@@ -203,21 +191,6 @@ const news = [
         if (searchInput instanceof HTMLInputElement) searchInput.placeholder = `在${tab.dataset.searchType}中输入关键词`;
       }));
 
-      const form = document.querySelector('.search-form');
-      const toast = document.querySelector('.toast');
-      form?.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const query = searchInput instanceof HTMLInputElement ? searchInput.value.trim() : '';
-        if (!query) {
-          searchInput?.focus();
-          if (toast instanceof HTMLElement) { toast.textContent = '请输入检索关键词'; toast.hidden = false; }
-        } else if (toast instanceof HTMLElement) {
-          const active = document.querySelector('[data-search-type].active');
-          toast.textContent = `正在${active?.textContent?.trim() || '馆藏'}中检索“${query}”`;
-          toast.hidden = false;
-        }
-        window.setTimeout(() => { if (toast instanceof HTMLElement) toast.hidden = true; }, 2800);
-      });
     </script>
   </body>
 </html>

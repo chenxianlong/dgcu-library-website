@@ -1,27 +1,78 @@
 ---
-import { getCollection } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import InnerHero from '../../components/InnerHero.astro';
-const resources = (await getCollection('resources')).sort((a, b) => Number(b.data.featured) - Number(a.data.featured));
-const categories = ['全部', ...new Set(resources.map((item) => item.data.category))];
+import { listResources } from '../../lib/server/content';
+const resources = listResources();
+const trialResources = resources.filter((item) => item.category === '试用数据库');
+const collectionResources = resources.filter((item) => item.category !== '试用数据库');
+const collectionCategories = ['全部', ...new Set(collectionResources.map((item) => item.category))];
 ---
-<SiteLayout title="资源发现" description="数据库、电子图书与开放学术资源" active="resources">
-  <InnerHero eyebrow="DISCOVER RESOURCES" title="资源发现" description="一站式发现中外文数据库、电子图书、考试学习与开放获取资源。" icon="database" />
-  <section class="inner-section page-shell">
-    <div class="resource-search"><span class="material-symbols-outlined">search</span><input type="search" placeholder="搜索数据库或资源名称" aria-label="搜索资源" /></div>
-    <div class="filter-bar" aria-label="资源分类">{categories.map((category, index) => <button class:list={{ active: index === 0 }} data-resource-filter={category}>{category}</button>)}</div>
-    <div class="resource-cards" data-resource-list>{resources.map((resource) => <article class="resource-card" data-category={resource.data.category} data-name={resource.data.name.toLowerCase()}>
-      <div class="resource-card-head"><span class="material-symbols-outlined">library_books</span><span class:list={['access-pill', resource.data.access === '公开' && 'open']}>{resource.data.access}</span></div>
-      <span class="resource-category">{resource.data.category}</span><h2>{resource.data.name}</h2><p>{resource.data.description}</p>
-      <a href={resource.data.url}>访问资源<span class="material-symbols-outlined">open_in_new</span></a>
-    </article>)}</div>
+<SiteLayout title="电子资源" description="数据库、电子图书与开放学术资源" active="resources">
+  <InnerHero eyebrow="ELECTRONIC RESOURCES" title="电子资源" description="一站式发现中外文数据库、电子图书、考试学习与开放获取资源。" icon="database" />
+  <section class="inner-section page-shell resource-directory-section">
+    <div class="resource-search resource-search-wide"><span class="material-symbols-outlined">search</span><input type="search" placeholder="搜索馆藏数据库或试用数据库" aria-label="搜索全部电子资源" /></div>
+
+    <div class="resource-directory">
+      <section class="resource-column collection-resource-column" aria-labelledby="collection-resource-title">
+        <header class="resource-column-header">
+          <div class="resource-column-title"><span class="material-symbols-outlined">account_balance</span><div><span>LIBRARY COLLECTION</span><h2 id="collection-resource-title">馆藏数据库</h2></div></div>
+          <p><strong data-collection-count>{collectionResources.length}</strong> 项资源</p>
+        </header>
+        <p class="resource-column-intro">图书馆正式订购、长期服务及开放获取的数据库资源。</p>
+        <div class="filter-bar resource-filter-bar" aria-label="筛选馆藏数据库">{collectionCategories.map((category, index) => <button class:list={{ active: index === 0 }} data-resource-filter={category}>{category}</button>)}</div>
+        <div class="resource-cards collection-resource-cards" data-resource-list="collection">{collectionResources.map((resource) => <article class="resource-card" data-resource-group="collection" data-category={resource.category} data-name={`${resource.name} ${resource.description}`.toLowerCase()}>
+          <div class="resource-card-head"><span class="material-symbols-outlined">library_books</span><span class:list={['access-pill', resource.access === '公开' && 'open']}>{resource.access}</span></div>
+          <span class="resource-category">{resource.category}</span><h3>{resource.name}</h3><p>{resource.description}</p>
+          <a href={resource.url}>访问资源<span class="material-symbols-outlined">open_in_new</span></a>
+        </article>)}</div>
+        <p class="resource-empty" data-resource-empty="collection" hidden>没有找到符合条件的馆藏数据库。</p>
+      </section>
+
+      <aside class="resource-column trial-resource-column" aria-labelledby="trial-resource-title">
+        <header class="resource-column-header trial-column-header">
+          <div class="resource-column-title"><span class="material-symbols-outlined">experiment</span><div><span>TRIAL ACCESS</span><h2 id="trial-resource-title">试用数据库</h2></div></div>
+          <p><strong data-trial-count>{trialResources.length}</strong> 项资源</p>
+        </header>
+        <p class="resource-column-intro">数据库试用权限和期限可能调整，请以资源平台及图书馆最新通知为准。</p>
+        <div class="resource-cards trial-resource-cards" data-resource-list="trial">{trialResources.map((resource) => <article class="resource-card trial-resource-card" data-resource-group="trial" data-name={`${resource.name} ${resource.description}`.toLowerCase()}>
+          <div class="resource-card-head"><span class="material-symbols-outlined">science</span><span class:list={['access-pill', resource.access === '公开' && 'open']}>{resource.access}</span></div>
+          <span class="resource-category">试用数据库</span><h3>{resource.name}</h3><p>{resource.description}</p>
+          <a href={resource.url}>访问试用<span class="material-symbols-outlined">open_in_new</span></a>
+        </article>)}</div>
+        <p class="resource-empty trial-resource-empty" data-resource-empty="trial" hidden>没有找到符合条件的试用数据库。</p>
+      </aside>
+    </div>
   </section>
   <script>
     const input = document.querySelector<HTMLInputElement>('.resource-search input');
     const buttons = document.querySelectorAll<HTMLButtonElement>('[data-resource-filter]');
-    const cards = document.querySelectorAll<HTMLElement>('.resource-card');
+    const collectionCards = [...document.querySelectorAll<HTMLElement>('[data-resource-group="collection"]')];
+    const trialCards = [...document.querySelectorAll<HTMLElement>('[data-resource-group="trial"]')];
+    const collectionCount = document.querySelector<HTMLElement>('[data-collection-count]');
+    const trialCount = document.querySelector<HTMLElement>('[data-trial-count]');
+    const collectionEmpty = document.querySelector<HTMLElement>('[data-resource-empty="collection"]');
+    const trialEmpty = document.querySelector<HTMLElement>('[data-resource-empty="trial"]');
     let category = '全部';
-    const update = () => cards.forEach((card) => { const matchesCategory = category === '全部' || card.dataset.category === category; const matchesSearch = (card.dataset.name || '').includes((input?.value || '').trim().toLowerCase()); card.hidden = !matchesCategory || !matchesSearch; });
+    const update = () => {
+      const query = (input?.value || '').trim().toLowerCase();
+      let visibleCollection = 0;
+      let visibleTrial = 0;
+      collectionCards.forEach((card) => {
+        const matchesCategory = category === '全部' || card.dataset.category === category;
+        const visible = matchesCategory && (card.dataset.name || '').includes(query);
+        card.hidden = !visible;
+        if (visible) visibleCollection += 1;
+      });
+      trialCards.forEach((card) => {
+        const visible = (card.dataset.name || '').includes(query);
+        card.hidden = !visible;
+        if (visible) visibleTrial += 1;
+      });
+      if (collectionCount) collectionCount.textContent = String(visibleCollection);
+      if (trialCount) trialCount.textContent = String(visibleTrial);
+      if (collectionEmpty) collectionEmpty.hidden = visibleCollection !== 0;
+      if (trialEmpty) trialEmpty.hidden = visibleTrial !== 0;
+    };
     buttons.forEach((button) => button.addEventListener('click', () => { category = button.dataset.resourceFilter || '全部'; buttons.forEach((item) => item.classList.remove('active')); button.classList.add('active'); update(); }));
     input?.addEventListener('input', update);
   </script>

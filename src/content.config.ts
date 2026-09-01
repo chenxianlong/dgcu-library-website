@@ -22,7 +22,7 @@ const resources = defineCollection({
     name: z.string(),
     description: z.string(),
     url: z.string(),
-    category: z.enum(['中文数据库', '外文数据库', '电子图书', '考试学习', '开放资源', '试用资源']),
+    category: z.enum(['中文数据库', '外文数据库', '电子图书', '考试学习', '开放资源', '试用资源', '试用数据库']),
     access: z.enum(['校内', 'VPN', '公开']),
     featured: z.boolean().default(false),
   }),

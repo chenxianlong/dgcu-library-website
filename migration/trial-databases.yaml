@@ -1,0 +1,154 @@
+- id: trial-legacy-740
+  name: 阅途美育在线
+  description: 专为高校与公共文化机构打造的美育资源平台，涵盖美育学堂、艺术鉴赏、美育图书、AI 创作和数字展馆等内容。旧站记录试用期限至 2025 年 12 月 31 日，校外访问需使用在校园网内注册的个人账号。
+  url: https://www.myu100.com/
+  category: 试用数据库
+  access: VPN
+  featured: false
+- id: trial-legacy-738
+  name: 设计师之家数字图书馆
+  description: 集数字教程、电子图书、期刊、设计素材、AI 绘画和数字展馆于一体的艺术设计知识服务平台。旧站记录试用期限至 2025 年 12 月 31 日，校外访问需使用在校园网内注册的个人账号。
+  url: https://www.51sjsj.com/
+  category: 试用数据库
+  access: VPN
+  featured: false
+- id: trial-legacy-715
+  name: 燕递文献服务系统
+  description: 整合海外电子书、期刊、预印本、视频和指南等外文资源，提供检索、获取、推送、订阅与翻译服务。旧站记录试用期限至 2025 年 10 月 31 日，首次使用需注册并选择“东莞城市学院”。
+  url: https://www.yandilib.com/
+  category: 试用数据库
+  access: 公开
+  featured: false
+- id: trial-legacy-712
+  name: 中国法律数据库（Lexis China）
+  description: 提供中国法律法规、司法案例和法律实务信息的专业检索服务。旧站记录试用期限为 2025 年 4 月 17 日至 6 月 16 日，校园网内自动登录。
+  url: https://hk.lexiscn.com/
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-709
+  name: Lexis® 全球法律数据库
+  description: 收录全球多个国家和地区的判例、法律法规、法律评论与新闻资源，面向法律教学和研究。旧站记录试用期限为 2025 年 4 月 17 日至 6 月 16 日，校园网内自动登录。
+  url: https://advance.lexis.com/?identityprofileid=HVGGXM74099
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-704
+  name: 人大复印报刊资料数据库
+  description: 汇集国内人文社会科学报刊研究成果，包含复印报刊资料全文数据库和数字期刊库。旧站记录试用期限为 2025 年 4 月 2 日至 7 月 2 日，校园网 IP 范围内免登录访问。
+  url: http://www.rdfybk.com/
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-697
+  name: 爱学术（iResearch）电子书库
+  description: 提供覆盖人文社科、理工农医等学科的外文学术电子书，并收录大量开放资源。旧站记录自 2025 年起长期试用，支持校园网、VPN、CARSI 和移动端访问。
+  url: http://www.iresearchbook.cn/
+  category: 试用数据库
+  access: VPN
+  featured: false
+- id: trial-legacy-677
+  name: 人民邮电出版社电子书
+  description: 提供计算机、电子信息、工学、经管、人文社科和艺术传媒等领域的专业电子书。旧站记录试用期限为 2024 年 12 月 11 日至 2025 年 6 月 11 日。
+  url: https://ryebook.ptpress.cn/
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-675
+  name: 新东方多媒体学习库
+  description: 新东方推出的一站式综合学习平台，涵盖国内考试、出国留学、小语种、应用外语、职业认证与求职指导课程。旧站记录试用期限为 2024 年 11 月 29 日至 2025 年 6 月 30 日。
+  url: http://library.koolearn.com/
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-672
+  name: 知网 AI 学术研究助手
+  description: 围绕文献检索、辅助研读、成果创作和知识管理提供生成式知识服务。旧站记录为限期试用，具体服务权限请以平台当前提示为准。
+  url: https://aiplus.cnki.net/
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-667
+  name: 万方数据知识服务平台
+  description: 提供学术期刊、学位论文、会议、专利、标准、成果、法规和地方志等知识资源及发现服务。保留旧站 2024 年较新试用记录，原试用期限至 2024 年 12 月 10 日。
+  url: https://www.wanfangdata.com.cn/
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-655
+  name: 博学易知考研数据库
+  description: 提供考研公共课、专业课、复试、英语四六级和考研直播等视频课程资源。旧站记录试用期限至 2024 年 12 月。
+  url: http://www.twbxyz.net/html/homeKy/
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-654
+  name: 博学易知考试数据库
+  description: 提供语言、计算机、法律、金融、学历、医学、建筑工程和职业资格等考试题库与在线自测服务。旧站记录试用期限至 2024 年 12 月。
+  url: http://www.twbxyz.net/html/homeKs/
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-653
+  name: 博学易知公考数据库
+  description: 提供公务员及事业单位考试的视频课程、历年真题和模拟题，覆盖行测、申论与面试。旧站记录试用期限至 2024 年 12 月。
+  url: http://www.twbxyz.net/html/homeGwy/
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-649
+  name: 中国近代经济思想文献数据库
+  description: 收录 1840—1949 年中国近代经济思想文献，支持全文检索与多条件检索。旧站记录试用期限至 2024 年 10 月 30 日，校园网 IP 范围内访问。
+  url: http://122.228.85.116:83/
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-636
+  name: 《鉴字源》论文检测系统
+  description: 提供 AI 生成文本检测和论文文本相似度检测服务。旧站记录试用周期为 2024 年 4 月 10 日至 10 月 10 日，需在校内 IP 环境注册使用。
+  url: http://b.jianziyuan.com/
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-614
+  name: 中国近代文学文献数据库（1840—1949）
+  description: 收录近代诗歌、散文、小说、戏剧、文学研究与汉译文学等稀见文献，支持全文检索。旧站记录试用期限至 2023 年 8 月 25 日，校园网内免登录使用。
+  url: https://www.ys-jdwxk.com/#/WXIndex
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-613
+  name: 中国近代教育文献全文检索知识服务数据库
+  description: 收录 1840—1949 年中国近代教育文献，覆盖教育史、教育法规、留学教育等多个类别。旧站记录试用期限至 2023 年 8 月 25 日，校园网内免登录使用。
+  url: https://www.ys-jdwxk.com/#/Index
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-611
+  name: NoteExpress 参考文献管理与检索系统
+  description: 支持文献检索、题录与全文管理、统计分析，以及在 Word、WPS 中插入引文并生成参考文献。旧站记录使用权至 2023 年 10 月 10 日，通过校园网 IP 控制。
+  url: http://www.inoteexpress.com/support/cgi-bin/download_sch.cgi?code=DGCSXY
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-599
+  name: 皮书数据库
+  description: 提供社会科学文献出版社皮书系列、智库报告、学术资讯和调研数据，涵盖社会、经济、行业、区域与国际问题。旧站记录试用期限为 2023 年 4 月 25 日至 7 月 31 日。
+  url: http://www.pishu.com.cn/
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-598
+  name: 笔杆网
+  description: 面向论文写作提供选题分析、资料搜集、提纲推荐、在线写作、参考文献和论文查重服务。旧站记录试用期限为 2023 年 4 月 25 日至 7 月 31 日。
+  url: https://www.bigan.net/
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-legacy-597
+  name: 工程科技数字图书馆
+  description: 机械工业出版社建设的工程科技电子出版平台，提供专业电子图书、行业年鉴、手册工具书与专业期刊。旧站记录试用期限为 2023 年 4 月 25 日至 7 月 31 日。
+  url: http://library.cmanuf.com/
+  category: 试用数据库
+  access: VPN
+  featured: false

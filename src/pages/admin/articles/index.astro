@@ -1,0 +1,17 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { listArticles } from '../../../lib/server/content';
+const articles = listArticles({ includeUnpublished: true, limit: 2000 });
+const saved = Astro.url.searchParams.get('saved');
+---
+<AdminLayout title="新闻与公告" active="articles">
+  <div class="page-title"><div><h1>新闻与公告</h1><p>共 {articles.length} 篇内容，修改保存后前台立即生效。</p></div><a class="primary-button" href="/admin/articles/new/"><span class="material-symbols-outlined">add</span>新建内容</a></div>
+  {saved && <p class="form-message">内容已保存。</p>}
+  <section class="admin-panel">
+    <div class="panel-header"><h2>全部内容</h2><div class="toolbar"><input type="search" placeholder="搜索标题或栏目" aria-label="搜索内容" data-table-search /></div></div>
+    <table class="admin-table" data-search-table><thead><tr><th>标题</th><th>栏目</th><th>发布日期</th><th>状态</th><th>操作</th></tr></thead><tbody>
+      {articles.map((article) => <tr data-row-search={`${article.title} ${article.category}`.toLowerCase()}><td><a class="title-link" href={`/admin/articles/${article.id}/`}>{article.title}</a></td><td>{article.category}</td><td>{article.date}</td><td><span class:list={['status-pill',article.status]}>{article.status === 'published' ? '已发布' : article.status === 'draft' ? '草稿' : '已归档'}</span></td><td><a href={`/admin/articles/${article.id}/`}>编辑</a></td></tr>)}
+    </tbody></table>
+  </section>
+  <script>const input=document.querySelector<HTMLInputElement>('[data-table-search]');const rows=document.querySelectorAll<HTMLElement>('[data-row-search]');input?.addEventListener('input',()=>{const q=input.value.trim().toLowerCase();rows.forEach(row=>row.hidden=!(row.dataset.rowSearch||'').includes(q));});</script>
+</AdminLayout>

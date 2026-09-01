@@ -1,0 +1,151 @@
+---
+interface Props {
+  value?: string;
+  initialHtml?: string;
+}
+
+const { value = '', initialHtml = '' } = Astro.props;
+---
+
+<div class="rich-text-shell" data-rich-text-editor>
+  <div class="rich-toolbar" role="toolbar" aria-label="正文格式工具栏">
+    <label class="rich-format-select">
+      <span class="sr-only">段落格式</span>
+      <select data-block-format aria-label="段落格式">
+        <option value="p">正文</option>
+        <option value="h2">二级标题</option>
+        <option value="h3">三级标题</option>
+        <option value="blockquote">引用</option>
+      </select>
+    </label>
+    <span class="rich-toolbar-divider" aria-hidden="true"></span>
+    <button type="button" data-command="bold" title="粗体" aria-label="粗体"><span class="material-symbols-outlined">format_bold</span></button>
+    <button type="button" data-command="italic" title="斜体" aria-label="斜体"><span class="material-symbols-outlined">format_italic</span></button>
+    <span class="rich-toolbar-divider" aria-hidden="true"></span>
+    <button type="button" data-command="insertUnorderedList" title="项目符号列表" aria-label="项目符号列表"><span class="material-symbols-outlined">format_list_bulleted</span></button>
+    <button type="button" data-command="insertOrderedList" title="编号列表" aria-label="编号列表"><span class="material-symbols-outlined">format_list_numbered</span></button>
+    <button type="button" data-action="link" title="插入链接" aria-label="插入链接"><span class="material-symbols-outlined">link</span></button>
+    <button type="button" data-command="unlink" title="取消链接" aria-label="取消链接"><span class="material-symbols-outlined">link_off</span></button>
+    <button type="button" data-command="insertHorizontalRule" title="分隔线" aria-label="插入分隔线"><span class="material-symbols-outlined">horizontal_rule</span></button>
+    <span class="rich-toolbar-spacer"></span>
+    <button type="button" data-command="undo" title="撤销" aria-label="撤销"><span class="material-symbols-outlined">undo</span></button>
+    <button type="button" data-command="redo" title="重做" aria-label="重做"><span class="material-symbols-outlined">redo</span></button>
+    <button type="button" data-command="removeFormat" title="清除格式" aria-label="清除格式"><span class="material-symbols-outlined">format_clear</span></button>
+  </div>
+
+  <div
+    class="rich-editor-canvas"
+    contenteditable="true"
+    role="textbox"
+    aria-multiline="true"
+    aria-label="正文"
+    data-placeholder="在这里输入正文……"
+    data-editor-canvas
+    set:html={initialHtml}
+  ></div>
+
+  <div class="rich-editor-footer">
+    <span>支持标题、粗体、斜体、列表、引用、链接和图片</span>
+    <span data-word-count>0 字</span>
+  </div>
+
+  <textarea class="rich-editor-source" id="content" name="content" aria-label="正文 Markdown 源码">{value}</textarea>
+</div>
+
+<script>
+  import TurndownService from 'turndown';
+
+  const turndown = new TurndownService({
+    headingStyle: 'atx',
+    bulletListMarker: '-',
+    codeBlockStyle: 'fenced',
+    emDelimiter: '_',
+  });
+  // This widely supported legacy API is isolated so the toolbar implementation
+  // can be replaced without changing the editor's storage format.
+  const editingDocument = document as unknown as {
+    execCommand: (command: string, showUi?: boolean, value?: string) => boolean;
+  };
+  const executeEditorCommand = (command: string, showUi = false, value?: string) => {
+    return editingDocument.execCommand(command, showUi, value);
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-rich-text-editor]').forEach((shell) => {
+    const canvas = shell.querySelector<HTMLElement>('[data-editor-canvas]');
+    const source = shell.querySelector<HTMLTextAreaElement>('.rich-editor-source');
+    const wordCount = shell.querySelector<HTMLElement>('[data-word-count]');
+    const form = shell.closest('form');
+    if (!canvas || !source || !wordCount || !form) return;
+
+    shell.classList.add('is-enhanced');
+    let savedRange: Range | null = null;
+
+    const rememberSelection = () => {
+      const selection = window.getSelection();
+      if (selection?.rangeCount && canvas.contains(selection.anchorNode)) {
+        savedRange = selection.getRangeAt(0).cloneRange();
+      }
+    };
+
+    const restoreSelection = () => {
+      canvas.focus();
+      if (!savedRange) return;
+      const selection = window.getSelection();
+      selection?.removeAllRanges();
+      selection?.addRange(savedRange);
+    };
+
+    const syncSource = () => {
+      const markdown = turndown.turndown(canvas.innerHTML).trim();
+      source.value = markdown;
+      const characters = (canvas.textContent || '').replace(/\s/g, '').length;
+      wordCount.textContent = `${characters} 字`;
+    };
+
+    document.addEventListener('selectionchange', rememberSelection);
+    canvas.addEventListener('input', () => {
+      rememberSelection();
+      syncSource();
+    });
+    canvas.addEventListener('blur', syncSource);
+
+    shell.querySelectorAll<HTMLButtonElement>('.rich-toolbar button').forEach((button) => {
+      button.addEventListener('mousedown', (event) => event.preventDefault());
+      button.addEventListener('click', () => {
+        restoreSelection();
+        if (button.dataset.action === 'link') {
+          const url = window.prompt('请输入链接地址（以 https:// 或 http:// 开头）');
+          if (!url) return;
+          if (!/^https?:\/\//i.test(url) && !url.startsWith('/')) {
+            window.alert('链接地址必须以 https://、http:// 或 / 开头。');
+            return;
+          }
+          executeEditorCommand('createLink', false, url);
+        } else if (button.dataset.command) {
+          executeEditorCommand(button.dataset.command, false);
+        }
+        rememberSelection();
+        syncSource();
+      });
+    });
+
+    shell.querySelector<HTMLSelectElement>('[data-block-format]')?.addEventListener('change', (event) => {
+      restoreSelection();
+      const select = event.currentTarget as HTMLSelectElement;
+      executeEditorCommand('formatBlock', false, select.value);
+      select.value = 'p';
+      rememberSelection();
+      syncSource();
+    });
+
+    form.addEventListener('submit', (event) => {
+      syncSource();
+      if (source.value.trim()) return;
+      event.preventDefault();
+      canvas.focus();
+      canvas.setAttribute('aria-invalid', 'true');
+    });
+
+    syncSource();
+  });
+</script>
