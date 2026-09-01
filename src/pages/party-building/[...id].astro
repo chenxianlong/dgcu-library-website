@@ -1,0 +1,19 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { getArticle, renderArticleContent } from '../../lib/server/content';
+
+const article = getArticle(Astro.params.id || '');
+if (!article || article.category !== '党建工作') return new Response('Not found', { status: 404 });
+const renderedContent = renderArticleContent(article.content);
+---
+
+<SiteLayout title={article.title} description={article.summary} active="party">
+  <div class="page-shell breadcrumb"><a href="/">首页</a><span>›</span><a href="/party-building/">党建工作</a><span>›</span><span>{article.date}</span></div>
+  <article class="article-detail page-shell">
+    <header><span class="detail-category">党建工作</span><h1>{article.title}</h1><div class="detail-meta"><time datetime={article.date}>{article.date}</time><span>东莞城市学院图书馆</span></div><p class="lead">{article.summary}</p></header>
+    {article.cover && <img class="detail-cover" src={article.cover} alt="" />}
+    <div class="prose" set:html={renderedContent}></div>
+    {article.sourceUrl && <p class="legacy-source">内容来源：<a href={article.sourceUrl}>查看原始页面</a></p>}
+    <a class="back-link" href="/party-building/"><span class="material-symbols-outlined">arrow_back</span>返回党建工作</a>
+  </article>
+</SiteLayout>

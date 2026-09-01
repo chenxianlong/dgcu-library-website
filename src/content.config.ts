@@ -5,9 +5,10 @@ import { z } from 'astro/zod';
 const articles = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdoc}', base: './src/content/articles' }),
   schema: z.object({
+    id: z.string().optional(),
     title: z.string(),
     date: z.coerce.date().transform((value) => value.toISOString().slice(0, 10)),
-    category: z.enum(['通知公告', '新闻动态', '活动预告', '获奖通知']),
+    category: z.enum(['通知公告', '新闻动态', '活动预告', '获奖通知', '党建工作']),
     summary: z.string(),
     cover: z.string().optional(),
     featured: z.boolean().default(false),

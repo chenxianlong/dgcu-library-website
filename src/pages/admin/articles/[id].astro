@@ -24,7 +24,7 @@ const editorHtml = article
     </section></div>
     <aside class="form-side"><section class="form-card"><h2>发布设置</h2>
       <div class="field"><label for="date">发布日期</label><input id="date" name="date" type="date" value={article?.date || new Date().toISOString().slice(0,10)} required /></div>
-      <div class="field"><label for="category">栏目</label><select id="category" name="category">{['通知公告','新闻动态','活动预告','获奖通知'].map(value=><option value={value} selected={article?.category===value}>{value}</option>)}</select></div>
+      <div class="field"><label for="category">栏目</label><select id="category" name="category">{['通知公告','新闻动态','活动预告','获奖通知','党建工作'].map(value=><option value={value} selected={article?.category===value}>{value}</option>)}</select></div>
       <div class="field"><label for="status">状态</label><select id="status" name="status">{[['published','发布'],['draft','草稿'],['archived','归档']].map(([value,label])=><option value={value} selected={(article?.status || 'published')===value}>{label}</option>)}</select></div>
       <label class="check-field"><input type="checkbox" name="featured" checked={article?.featured} />首页推荐</label>
     </section><section class="form-card"><h2>扩展信息</h2>

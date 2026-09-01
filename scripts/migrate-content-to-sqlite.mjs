@@ -33,7 +33,7 @@ const insertArticle = db.prepare(`INSERT OR IGNORE INTO articles (id,title,date,
 let articles = 0;
 for (const file of filesUnder(articleRoot).filter((item) => ['.md','.mdoc'].includes(extname(item)))) {
   const parsed = matter(readFileSync(file, 'utf8'));
-  const id = relative(articleRoot, file).replaceAll('\\','/').replace(/\.(md|mdoc)$/,'');
+  const id = String(parsed.data.id || relative(articleRoot, file).replaceAll('\\','/').replace(/\.(md|mdoc)$/,''));
   insertArticle.run(id,String(parsed.data.title||id),normalizeDate(parsed.data.date),String(parsed.data.category||'通知公告'),String(parsed.data.summary||''),String(parsed.data.cover||''),parsed.data.featured?1:0,String(parsed.data.sourceUrl||''),String(parsed.data.legacyId||''),parsed.content.trim(),'published',now,now);
   articles++;
 }

@@ -1,0 +1,34 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import InnerHero from '../../components/InnerHero.astro';
+import { countArticles, listArticles } from '../../lib/server/content';
+
+const pageSize = 12;
+const category = '党建工作';
+const totalCount = countArticles({ category });
+const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
+const page = Math.min(Math.max(Number(Astro.url.searchParams.get('page') || 1), 1), totalPages);
+const articles = listArticles({ category, limit: pageSize, offset: (page - 1) * pageSize });
+---
+
+<SiteLayout title="党建工作" description="东莞城市学院图书馆党建工作动态" active="party">
+  <InnerHero eyebrow="PARTY BUILDING" title="党建工作" description="坚持党建引领，凝聚奋进力量，以高质量党建推动图书馆事业高质量发展。" icon="flag" />
+  <section class="inner-section page-shell">
+    <div class="list-toolbar party-list-heading">
+      <div><span class="section-kicker">党建动态</span><h2>支部学习与实践</h2></div>
+      <p>共 {totalCount} 篇内容</p>
+    </div>
+    <div class="article-list">
+      {articles.map((article) => <article class="article-row">
+        <div class="date-block"><strong>{article.date.slice(8, 10)}</strong><span>{article.date.slice(0, 7)}</span></div>
+        <div class="article-copy"><div class="meta"><span>{article.category}</span></div><h2><a href={`/party-building/${article.id}/`}>{article.title}</a></h2><p>{article.summary}</p></div>
+        <a class="row-arrow" href={`/party-building/${article.id}/`} aria-label={`查看${article.title}`}><span class="material-symbols-outlined">arrow_forward</span></a>
+      </article>)}
+    </div>
+    <nav class="pagination" aria-label="党建工作分页">
+      {page > 1 ? <a href={`/party-building/?page=${page - 1}`}>上一页</a> : <span>上一页</span>}
+      <strong>{page} / {totalPages}</strong>
+      {page < totalPages ? <a href={`/party-building/?page=${page + 1}`}>下一页</a> : <span>下一页</span>}
+    </nav>
+  </section>
+</SiteLayout>

@@ -12,7 +12,7 @@ const services = [
   { icon: 'support_agent', title: '咨询帮助', detail: '常见问题 / 联系我们', href: '/services/#reference' },
 ];
 
-const latestArticles = listArticles({ limit: 8 });
+const latestArticles = listArticles({ excludeCategory: '党建工作', limit: 8 });
 const notices = latestArticles.slice(0, 5);
 const resources = listResources().slice(0, 8);
 const serviceHours = getServiceHours();
@@ -59,6 +59,7 @@ const news = latestArticles.slice(0,4).map((article,index)=>({ ...article, image
           <a class="active" href="/">首页</a>
           <a href="/news/">新闻公告</a>
           <a href="/about/">关于本馆</a>
+          <a href="/party-building/">党建工作</a>
           <a href="/resources/">电子资源</a>
           <a href="/services/">读者服务</a>
           <a href="/services/#space">空间服务</a>
@@ -166,7 +167,7 @@ const news = latestArticles.slice(0,4).map((article,index)=>({ ...article, image
           <div><strong>东莞城市学院图书馆</strong><p>地址：广东省东莞市寮步镇文昌路1号（523419）</p><p>电话：0769-23382676　邮箱：library@dgcu.edu.cn</p></div>
         </div>
         <div class="footer-links"><strong>快速链接</strong><a href="https://dgcu.edu.cn">学校官网</a><a href="#footer">教务处</a><a href="#footer">信息化中心</a></div>
-        <div class="footer-links"><strong>网站地图</strong><a href="#resources">电子资源</a><a href="#services">读者服务</a><a href="#news">新闻公告</a></div>
+        <div class="footer-links"><strong>网站地图</strong><a href="/party-building/">党建工作</a><a href="#resources">电子资源</a><a href="#services">读者服务</a><a href="#news">新闻公告</a></div>
         <div class="qr-block"><strong>关注我们</strong><img src="/images/library-wechat.jpg" alt="图书馆微信公众号二维码" /></div>
       </div>
       <div class="copyright">Copyright © 2014–2026 东莞城市学院图书馆. All Rights Reserved.</div>

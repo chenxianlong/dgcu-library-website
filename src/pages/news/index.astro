@@ -3,11 +3,11 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import InnerHero from '../../components/InnerHero.astro';
 import { countArticles, listArticles } from '../../lib/server/content';
 const pageSize = 20;
-const totalCount = countArticles();
+const totalCount = countArticles({ excludeCategory: '党建工作' });
 const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
 const page = Math.min(Math.max(Number(Astro.url.searchParams.get('page') || 1), 1), totalPages);
-const articles = listArticles({ limit: pageSize, offset: (page - 1) * pageSize });
-const categories = ['全部', ...new Set(listArticles({ limit: 2000 }).map((item) => item.category))];
+const articles = listArticles({ excludeCategory: '党建工作', limit: pageSize, offset: (page - 1) * pageSize });
+const categories = ['全部', ...new Set(listArticles({ excludeCategory: '党建工作', limit: 2000 }).map((item) => item.category))];
 ---
 <SiteLayout title="新闻公告" description="图书馆新闻、通知与活动信息" active="news">
   <InnerHero eyebrow="NEWS & NOTICES" title="新闻公告" description="及时了解图书馆开放安排、资源动态、阅读活动与服务通知。" icon="newspaper" />

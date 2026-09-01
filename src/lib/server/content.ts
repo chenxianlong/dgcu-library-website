@@ -37,16 +37,34 @@ function resourceFromRow(row: Record<string, unknown>): LibraryResource {
   };
 }
 
-export function listArticles(options: { includeUnpublished?: boolean; limit?: number; offset?: number } = {}) {
-  const where = options.includeUnpublished ? '' : "WHERE status = 'published'";
-  const limit = Math.max(1, Math.min(options.limit || 1000, 2000));
-  const offset = Math.max(0, options.offset || 0);
-  return (getDatabase().prepare(`SELECT * FROM articles ${where} ORDER BY date DESC, id DESC LIMIT ? OFFSET ?`).all(limit, offset) as Record<string, unknown>[]).map(articleFromRow);
+type ArticleQueryOptions = {
+  includeUnpublished?: boolean;
+  category?: string;
+  excludeCategory?: string;
+  limit?: number;
+  offset?: number;
+};
+
+function articleWhere(options: ArticleQueryOptions) {
+  const conditions: string[] = [];
+  const parameters: string[] = [];
+  if (!options.includeUnpublished) conditions.push("status = 'published'");
+  if (options.category) { conditions.push('category = ?'); parameters.push(options.category); }
+  if (options.excludeCategory) { conditions.push('category != ?'); parameters.push(options.excludeCategory); }
+  return { clause: conditions.length ? `WHERE ${conditions.join(' AND ')}` : '', parameters };
 }
 
-export function countArticles(includeUnpublished = false) {
-  const where = includeUnpublished ? '' : "WHERE status = 'published'";
-  return Number((getDatabase().prepare(`SELECT COUNT(*) AS count FROM articles ${where}`).get() as { count: number }).count);
+export function listArticles(options: ArticleQueryOptions = {}) {
+  const where = articleWhere(options);
+  const limit = Math.max(1, Math.min(options.limit || 1000, 2000));
+  const offset = Math.max(0, options.offset || 0);
+  return (getDatabase().prepare(`SELECT * FROM articles ${where.clause} ORDER BY date DESC, id DESC LIMIT ? OFFSET ?`).all(...where.parameters, limit, offset) as Record<string, unknown>[]).map(articleFromRow);
+}
+
+export function countArticles(input: boolean | Omit<ArticleQueryOptions, 'limit' | 'offset'> = false) {
+  const options = typeof input === 'boolean' ? { includeUnpublished: input } : input;
+  const where = articleWhere(options);
+  return Number((getDatabase().prepare(`SELECT COUNT(*) AS count FROM articles ${where.clause}`).get(...where.parameters) as { count: number }).count);
 }
 
 export function getArticle(id: string, includeUnpublished = false) {
