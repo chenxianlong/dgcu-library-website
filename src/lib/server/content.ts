@@ -89,7 +89,11 @@ export function saveResource(input: Omit<LibraryResource, 'createdAt' | 'updated
 
 export function renderArticleContent(content: string) {
   const ast = Markdoc.parse(content);
-  const transformed = Markdoc.transform(ast);
+  const transformed = Markdoc.transform(ast, {
+    nodes: {
+      softbreak: { render: 'br' },
+    },
+  });
   return Markdoc.renderers.html(transformed);
 }
 
