@@ -1,151 +1,161 @@
 ---
+import 'easymde/dist/easymde.min.css';
+
 interface Props {
   value?: string;
-  initialHtml?: string;
+  csrfToken: string;
 }
 
-const { value = '', initialHtml = '' } = Astro.props;
+const { value = '', csrfToken } = Astro.props;
 ---
 
-<div class="rich-text-shell" data-rich-text-editor>
-  <div class="rich-toolbar" role="toolbar" aria-label="正文格式工具栏">
-    <label class="rich-format-select">
-      <span class="sr-only">段落格式</span>
-      <select data-block-format aria-label="段落格式">
-        <option value="p">正文</option>
-        <option value="h2">二级标题</option>
-        <option value="h3">三级标题</option>
-        <option value="blockquote">引用</option>
-      </select>
-    </label>
-    <span class="rich-toolbar-divider" aria-hidden="true"></span>
-    <button type="button" data-command="bold" title="粗体" aria-label="粗体"><span class="material-symbols-outlined">format_bold</span></button>
-    <button type="button" data-command="italic" title="斜体" aria-label="斜体"><span class="material-symbols-outlined">format_italic</span></button>
-    <span class="rich-toolbar-divider" aria-hidden="true"></span>
-    <button type="button" data-command="insertUnorderedList" title="项目符号列表" aria-label="项目符号列表"><span class="material-symbols-outlined">format_list_bulleted</span></button>
-    <button type="button" data-command="insertOrderedList" title="编号列表" aria-label="编号列表"><span class="material-symbols-outlined">format_list_numbered</span></button>
-    <button type="button" data-action="link" title="插入链接" aria-label="插入链接"><span class="material-symbols-outlined">link</span></button>
-    <button type="button" data-command="unlink" title="取消链接" aria-label="取消链接"><span class="material-symbols-outlined">link_off</span></button>
-    <button type="button" data-command="insertHorizontalRule" title="分隔线" aria-label="插入分隔线"><span class="material-symbols-outlined">horizontal_rule</span></button>
-    <span class="rich-toolbar-spacer"></span>
-    <button type="button" data-command="undo" title="撤销" aria-label="撤销"><span class="material-symbols-outlined">undo</span></button>
-    <button type="button" data-command="redo" title="重做" aria-label="重做"><span class="material-symbols-outlined">redo</span></button>
-    <button type="button" data-command="removeFormat" title="清除格式" aria-label="清除格式"><span class="material-symbols-outlined">format_clear</span></button>
+<div class="markdown-editor-shell" data-markdown-editor data-csrf={csrfToken}>
+  <textarea id="content" name="content" aria-label="正文 Markdown 源码" required>{value}</textarea>
+  <input class="sr-only" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple data-editor-image-input />
+  <div class="markdown-editor-help">
+    <span><span class="material-symbols-outlined" aria-hidden="true">info</span>图片会插入到当前光标位置；选中文字后可设置居中或右对齐。</span>
+    <span data-upload-status aria-live="polite"></span>
   </div>
-
-  <div
-    class="rich-editor-canvas"
-    contenteditable="true"
-    role="textbox"
-    aria-multiline="true"
-    aria-label="正文"
-    data-placeholder="在这里输入正文……"
-    data-editor-canvas
-    set:html={initialHtml}
-  ></div>
-
-  <div class="rich-editor-footer">
-    <span>支持标题、粗体、斜体、列表、引用、链接和图片</span>
-    <span data-word-count>0 字</span>
-  </div>
-
-  <textarea class="rich-editor-source" id="content" name="content" aria-label="正文 Markdown 源码">{value}</textarea>
 </div>
 
 <script>
-  import TurndownService from 'turndown';
+  import EasyMDE from 'easymde';
+  import { renderMarkdown } from '../../lib/markdown';
 
-  const turndown = new TurndownService({
-    headingStyle: 'atx',
-    bulletListMarker: '-',
-    codeBlockStyle: 'fenced',
-    emDelimiter: '_',
-  });
-  // This widely supported legacy API is isolated so the toolbar implementation
-  // can be replaced without changing the editor's storage format.
-  const editingDocument = document as unknown as {
-    execCommand: (command: string, showUi?: boolean, value?: string) => boolean;
-  };
-  const executeEditorCommand = (command: string, showUi = false, value?: string) => {
-    return editingDocument.execCommand(command, showUi, value);
+  type CodeMirrorPosition = { line: number; ch: number };
+  type EditorToolbarButton = {
+    name: string;
+    action: (editor: EasyMDE) => void;
+    className: string;
+    title: string;
   };
 
-  document.querySelectorAll<HTMLElement>('[data-rich-text-editor]').forEach((shell) => {
-    const canvas = shell.querySelector<HTMLElement>('[data-editor-canvas]');
-    const source = shell.querySelector<HTMLTextAreaElement>('.rich-editor-source');
-    const wordCount = shell.querySelector<HTMLElement>('[data-word-count]');
-    const form = shell.closest('form');
-    if (!canvas || !source || !wordCount || !form) return;
+  const insertAlignment = (editor: EasyMDE, position: 'center' | 'right') => {
+    const cm = editor.codemirror;
+    const selected = cm.getSelection();
+    const cursor = cm.getCursor();
+    const line = cm.getLine(cursor.line);
+    const content = selected || line || (position === 'right' ? '落款' : '居中文字');
+    const replacement = `{% align position="${position}" %}\n\n${content}\n\n{% /align %}`;
+    if (selected) {
+      cm.replaceSelection(replacement);
+    } else if (line) {
+      cm.replaceRange(replacement, { line: cursor.line, ch: 0 }, { line: cursor.line, ch: line.length });
+    } else {
+      cm.replaceSelection(replacement);
+    }
+    cm.focus();
+  };
 
-    shell.classList.add('is-enhanced');
-    let savedRange: Range | null = null;
+  const translatedTitles: Record<string, string> = {
+    Bold: '粗体', Italic: '斜体', Heading: '标题', Quote: '引用',
+    'Generic List': '无序列表', 'Numbered List': '有序列表',
+    'Create Link': '插入链接', 'Insert Table': '插入表格',
+    'Insert Horizontal Line': '插入分隔线', Preview: '预览', 'Toggle Preview': '预览',
+    'Side-by-Side Mode': '分栏预览', 'Toggle Side by Side': '分栏预览',
+    'Toggle Fullscreen': '全屏编辑', Guide: 'Markdown 帮助', 'Markdown Guide': 'Markdown 帮助',
+  };
 
-    const rememberSelection = () => {
-      const selection = window.getSelection();
-      if (selection?.rangeCount && canvas.contains(selection.anchorNode)) {
-        savedRange = selection.getRangeAt(0).cloneRange();
+  document.querySelectorAll<HTMLElement>('[data-markdown-editor]').forEach((shell) => {
+    const textarea = shell.querySelector<HTMLTextAreaElement>('textarea[name="content"]');
+    const imageInput = shell.querySelector<HTMLInputElement>('[data-editor-image-input]');
+    const uploadStatus = shell.querySelector<HTMLElement>('[data-upload-status]');
+    const form = shell.closest<HTMLFormElement>('form');
+    if (!textarea || !imageInput || !uploadStatus || !form) return;
+
+    const imageButton: EditorToolbarButton = {
+      name: 'upload-image-at-cursor',
+      action: () => imageInput.click(),
+      className: 'fa fa-picture-o editor-upload-image',
+      title: '上传图片到光标位置',
+    };
+    const alignCenterButton: EditorToolbarButton = {
+      name: 'align-center',
+      action: (editor) => insertAlignment(editor, 'center'),
+      className: 'fa fa-align-center',
+      title: '居中对齐',
+    };
+    const alignRightButton: EditorToolbarButton = {
+      name: 'align-right',
+      action: (editor) => insertAlignment(editor, 'right'),
+      className: 'fa fa-align-right',
+      title: '右对齐（适合落款）',
+    };
+
+    const editor = new EasyMDE({
+      element: textarea,
+      autofocus: false,
+      forceSync: true,
+      minHeight: '460px',
+      placeholder: '使用 Markdown 编写正文……',
+      previewRender: (markdown) => renderMarkdown(markdown),
+      promptURLs: true,
+      sideBySideFullscreen: false,
+      spellChecker: false,
+      status: ['lines', 'words', 'cursor'],
+      toolbar: [
+        'bold', 'italic', 'heading', '|',
+        'quote', 'unordered-list', 'ordered-list', '|',
+        'link', imageButton, 'table', 'horizontal-rule', '|',
+        alignCenterButton, alignRightButton, '|',
+        'preview', 'side-by-side', 'fullscreen', '|', 'guide',
+      ],
+    });
+
+    shell.querySelectorAll<HTMLElement>('.editor-toolbar button, .editor-toolbar a').forEach((button) => {
+      const current = button.getAttribute('title') || button.getAttribute('aria-label');
+      if (current && translatedTitles[current]) {
+        button.setAttribute('title', translatedTitles[current]);
+        button.setAttribute('aria-label', translatedTitles[current]);
       }
-    };
-
-    const restoreSelection = () => {
-      canvas.focus();
-      if (!savedRange) return;
-      const selection = window.getSelection();
-      selection?.removeAllRanges();
-      selection?.addRange(savedRange);
-    };
-
-    const syncSource = () => {
-      const markdown = turndown.turndown(canvas.innerHTML).trim();
-      source.value = markdown;
-      const characters = (canvas.textContent || '').replace(/\s/g, '').length;
-      wordCount.textContent = `${characters} 字`;
-    };
-
-    document.addEventListener('selectionchange', rememberSelection);
-    canvas.addEventListener('input', () => {
-      rememberSelection();
-      syncSource();
     });
-    canvas.addEventListener('blur', syncSource);
 
-    shell.querySelectorAll<HTMLButtonElement>('.rich-toolbar button').forEach((button) => {
-      button.addEventListener('mousedown', (event) => event.preventDefault());
-      button.addEventListener('click', () => {
-        restoreSelection();
-        if (button.dataset.action === 'link') {
-          const url = window.prompt('请输入链接地址（以 https:// 或 http:// 开头）');
-          if (!url) return;
-          if (!/^https?:\/\//i.test(url) && !url.startsWith('/')) {
-            window.alert('链接地址必须以 https://、http:// 或 / 开头。');
-            return;
-          }
-          executeEditorCommand('createLink', false, url);
-        } else if (button.dataset.command) {
-          executeEditorCommand(button.dataset.command, false);
+    imageInput.addEventListener('change', async () => {
+      const files = Array.from(imageInput.files || []);
+      if (!files.length) return;
+      const cm = editor.codemirror;
+      let insertionPoint: CodeMirrorPosition = cm.getCursor();
+      uploadStatus.textContent = `正在上传 0 / ${files.length}…`;
+      uploadStatus.classList.remove('is-error');
+      imageInput.disabled = true;
+
+      try {
+        for (let index = 0; index < files.length; index += 1) {
+          const file = files[index];
+          const data = new FormData();
+          data.set('csrf', shell.dataset.csrf || '');
+          data.set('image', file);
+          const response = await fetch('/admin/api/uploads/image', { method: 'POST', body: data });
+          const result = await response.json() as { path?: string; error?: string };
+          if (!response.ok || !result.path) throw new Error(result.error || '图片上传失败');
+          const alt = file.name.replace(/\.[^.]+$/, '').replace(/[\[\]]/g, '') || '正文图片';
+          const markdown = `${insertionPoint.ch ? '\n\n' : ''}![${alt}](${result.path})\n\n`;
+          cm.replaceRange(markdown, insertionPoint);
+          const lines = markdown.split('\n');
+          insertionPoint = {
+            line: insertionPoint.line + lines.length - 1,
+            ch: lines.length === 1 ? insertionPoint.ch + markdown.length : lines.at(-1)?.length || 0,
+          };
+          uploadStatus.textContent = `正在上传 ${index + 1} / ${files.length}…`;
         }
-        rememberSelection();
-        syncSource();
-      });
-    });
-
-    shell.querySelector<HTMLSelectElement>('[data-block-format]')?.addEventListener('change', (event) => {
-      restoreSelection();
-      const select = event.currentTarget as HTMLSelectElement;
-      executeEditorCommand('formatBlock', false, select.value);
-      select.value = 'p';
-      rememberSelection();
-      syncSource();
+        cm.setCursor(insertionPoint);
+        cm.focus();
+        uploadStatus.textContent = `已在光标位置插入 ${files.length} 张图片`;
+      } catch (error) {
+        uploadStatus.textContent = error instanceof Error ? error.message : '图片上传失败';
+        uploadStatus.classList.add('is-error');
+      } finally {
+        imageInput.disabled = false;
+        imageInput.value = '';
+      }
     });
 
     form.addEventListener('submit', (event) => {
-      syncSource();
-      if (source.value.trim()) return;
+      textarea.value = editor.value().trim();
+      if (textarea.value) return;
       event.preventDefault();
-      canvas.focus();
-      canvas.setAttribute('aria-invalid', 'true');
+      editor.codemirror.focus();
+      shell.classList.add('has-error');
     });
-
-    syncSource();
   });
 </script>

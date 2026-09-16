@@ -1,5 +1,5 @@
-import Markdoc from '@markdoc/markdoc';
 import { getDatabase, nowIso } from './db';
+import { renderMarkdown } from '../markdown';
 
 export type Article = {
   id: string; title: string; date: string; category: string; summary: string; cover: string;
@@ -106,13 +106,7 @@ export function saveResource(input: Omit<LibraryResource, 'createdAt' | 'updated
 }
 
 export function renderArticleContent(content: string) {
-  const ast = Markdoc.parse(content);
-  const transformed = Markdoc.transform(ast, {
-    nodes: {
-      softbreak: { render: 'br' },
-    },
-  });
-  return Markdoc.renderers.html(transformed);
+  return renderMarkdown(content);
 }
 
 export function slugify(value: string) {

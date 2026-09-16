@@ -15,11 +15,6 @@ export const POST: APIRoute = async (context) => {
   const status = ['published','draft','archived'].includes(text(form,'status',20)) ? text(form,'status',20) : 'draft';
   try {
     const uploadedCover = await storeImage(form.get('coverFile'));
-    const bodyImages = form.getAll('contentImages');
-    for (const value of bodyImages) {
-      const imagePath = await storeImage(value);
-      if (imagePath) content += `\n\n![正文图片](${imagePath})`;
-    }
     saveArticle({ id, title, date, summary, content, category: text(form,'category',40), cover: uploadedCover || text(form,'cover',500), featured: form.get('featured') === 'on', sourceUrl: text(form,'sourceUrl',1000), legacyId: text(form,'legacyId',100), status });
   } catch {
     return context.redirect(`/admin/articles/${originalId || 'new'}/?error=upload`,303);
