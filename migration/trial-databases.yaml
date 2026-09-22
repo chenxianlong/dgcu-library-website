@@ -1,3 +1,10 @@
+- id: trial-zhiyuebook
+  name: 知阅在线电子书平台
+  description: 电子工业出版社电子书平台，提供电子工业出版社出版的电子书资源在线检索与阅读服务。
+  url: https://www.zhiyuebook.com/
+  category: 试用数据库
+  access: 校内
+  featured: false
 - id: trial-legacy-740
   name: 阅途美育在线
   description: 专为高校与公共文化机构打造的美育资源平台，涵盖美育学堂、艺术鉴赏、美育图书、AI 创作和数字展馆等内容。旧站记录试用期限至 2025 年 12 月 31 日，校外访问需使用在校园网内注册的个人账号。
