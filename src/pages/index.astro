@@ -16,7 +16,7 @@ const latestArticles = listArticles({ excludeCategory: '党建工作', limit: 8 
 const notices = latestArticles.slice(0, 5);
 const purchasedResourceIds = ['cnki', 'chaoxing-digital-books', 'duxiu', 'emerald', 'met-english', 'yinfu-remote', 'yinfu-local', 'guoyan', 'youyue-foreign-books'];
 const resourceById = new Map(listResources().map((resource) => [resource.id, resource]));
-const resources = purchasedResourceIds.map((id) => resourceById.get(id)).filter((resource) => resource !== undefined).slice(0, 8);
+const resources = purchasedResourceIds.map((id) => resourceById.get(id)).filter((resource) => resource !== undefined);
 const serviceHours = getServiceHours();
 
 const learning = [
