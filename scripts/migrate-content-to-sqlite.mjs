@@ -39,6 +39,8 @@ for (const file of filesUnder(articleRoot).filter((item) => ['.md','.mdoc'].incl
 }
 
 const resourceRoot = resolve(root, 'src/content/resources');
+const purchasedResourceIds = new Set(['cnki', 'chaoxing-digital-books', 'duxiu', 'emerald', 'met-english', 'yinfu-remote', 'yinfu-local', 'guoyan', 'youyue-foreign-books']);
+const currentTrialIds = new Set(['trial-legacy-672', 'trial-zhiyuebook', 'trial-legacy-677']);
 const insertResource = db.prepare(`INSERT OR IGNORE INTO resources (id,name,description,url,category,access,featured,status,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?,?)`);
 let resources = 0;
 for (const file of filesUnder(resourceRoot).filter((item) => ['.yaml','.yml'].includes(extname(item)))) {
@@ -47,6 +49,7 @@ for (const file of filesUnder(resourceRoot).filter((item) => ['.yaml','.yml'].in
   const fileId = relative(resourceRoot,file).replaceAll('\\','/').replace(/\.ya?ml$/,'');
   for (const [index, data] of entries.entries()) {
     const id = String(data.id || (entries.length === 1 ? fileId : `${fileId}-${index + 1}`));
+    if (!purchasedResourceIds.has(id)) continue;
     insertResource.run(id,String(data.name||id),String(data.description||''),String(data.url||''),String(data.category||'中文数据库'),String(data.access||'校内'),data.featured?1:0,'published',now,now);
     resources++;
   }
@@ -57,6 +60,7 @@ if (existsSync(trialResourceFile)) {
   const trialResources = YAML.parse(readFileSync(trialResourceFile, 'utf8'));
   for (const data of trialResources) {
     const id = String(data.id);
+    if (!currentTrialIds.has(id)) continue;
     insertResource.run(id,String(data.name||id),String(data.description||''),String(data.url||''),String(data.category||'试用数据库'),String(data.access||'校内'),data.featured?1:0,'published',now,now);
     resources++;
   }

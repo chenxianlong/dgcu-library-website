@@ -55,8 +55,8 @@
   access: VPN
   featured: false
 - id: trial-legacy-677
-  name: 人民邮电出版社电子书
-  description: 提供计算机、电子信息、工学、经管、人文社科和艺术传媒等领域的专业电子书。旧站记录试用期限为 2024 年 12 月 11 日至 2025 年 6 月 11 日。
+  name: 人民邮电出版社电子书平台
+  description: 提供计算机、电子信息、工学、经管、人文社科和艺术传媒等领域的专业电子书，试用权限以平台当前提示为准。
   url: https://ryebook.ptpress.cn/
   category: 试用数据库
   access: 校内
@@ -69,8 +69,8 @@
   access: 校内
   featured: false
 - id: trial-legacy-672
-  name: 知网 AI 学术研究助手
-  description: 围绕文献检索、辅助研读、成果创作和知识管理提供生成式知识服务。旧站记录为限期试用，具体服务权限请以平台当前提示为准。
+  name: 中国知网 CNKI AI
+  description: CNKI AI 新一代生成式知识服务平台，提供文献检索、辅助研读、成果创作和知识管理功能。
   url: https://aiplus.cnki.net/
   category: 试用数据库
   access: 校内

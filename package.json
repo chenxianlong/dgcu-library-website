@@ -12,6 +12,7 @@
     "astro": "astro",
     "audit:content": "node scripts/audit-content.mjs",
     "db:migrate": "node scripts/migrate-content-to-sqlite.mjs",
+    "db:align-resources": "node scripts/align-resource-catalog.mjs",
     "db:repair-dates": "node scripts/repair-database-dates.mjs",
     "db:export-public": "node scripts/export-public-database.mjs",
     "admin:create": "node scripts/create-admin.mjs",

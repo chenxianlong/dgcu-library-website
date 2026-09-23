@@ -240,7 +240,7 @@ img { display: block; max-width: 100%; }
 .about-data-note { margin-bottom: 0; color: rgba(255,255,255,.54); font-size: 11px; text-align: right; }
 .about-floor-section { margin-bottom: clamp(72px, 9vw, 128px); padding-block: clamp(62px, 7vw, 92px); background: #143d2e; }
 .about-section-heading-light h2 { color: #fff; }
-.about-floor-list { display: grid; grid-template-columns: repeat(5, 1fr); margin: 44px 0 0; padding: 0; list-style: none; }
+.about-floor-list { display: grid; grid-template-columns: repeat(4, 1fr); margin: 44px 0 0; padding: 0; list-style: none; }
 .about-floor-list li { min-width: 0; padding: 0 24px 8px; border-left: 1px solid rgba(255,255,255,.16); }
 .about-floor-list li:first-child { padding-left: 0; border-left: 0; }
 .about-floor-list b { display: block; margin-bottom: 34px; color: #d6b964; font-size: 14px; letter-spacing: .12em; }
