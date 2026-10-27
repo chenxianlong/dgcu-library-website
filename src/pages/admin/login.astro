@@ -1,0 +1,40 @@
+---
+import '../../styles/admin.css';
+const error = Astro.url.searchParams.get('error');
+const next = Astro.url.searchParams.get('next') || '/admin/';
+const messages: Record<string, string> = {
+  invalid: '用户名或密码不正确。',
+  limited: '登录失败次数过多，请在 15 分钟后重试。',
+  missing: '请输入用户名和密码。',
+};
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" /><meta name="theme-color" content="#064b31" />
+    <link rel="icon" href="/images/favicon.ico" type="image/png" />
+    <title>后台登录｜东莞城市学院图书馆</title>
+  </head>
+  <body>
+    <main class="login-page">
+      <section class="login-visual" aria-label="东莞城市学院图书馆内容管理系统">
+        <div class="login-logo"><img src="/images/school-seal.png" alt="东莞城市学院校徽" /><strong>东莞城市学院图书馆<small>DONGGUAN CITY UNIVERSITY LIBRARY</small></strong></div>
+        <div class="login-copy"><span>LIBRARY CONTENT SYSTEM</span><h1>让每一次内容更新<br />准确、清晰、可追溯</h1><p>统一管理图书馆新闻公告与数字资源，为师生提供及时可靠的信息服务。</p></div>
+        <div class="login-foot">东莞城市学院图书馆 · 内容管理系统</div>
+      </section>
+      <section class="login-panel">
+        <form class="login-card" method="post" action="/admin/api/login">
+          <img src="/images/school-seal.png" alt="东莞城市学院校徽" />
+          <h2>管理员登录</h2><p>请输入图书馆内容管理员账号</p>
+          {error && <div class="form-message form-error" role="alert">{messages[error] || '登录失败，请重试。'}</div>}
+          <input type="hidden" name="next" value={next} />
+          <div class="field"><label for="username">用户名</label><input id="username" name="username" autocomplete="username" required autofocus /></div>
+          <div class="field"><label for="password">密码</label><input id="password" name="password" type="password" autocomplete="current-password" required /></div>
+          <button class="primary-button" type="submit"><span class="material-symbols-outlined">login</span>安全登录</button>
+          <div class="login-help">后台仅供授权工作人员使用。连续登录失败将触发临时保护。</div>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

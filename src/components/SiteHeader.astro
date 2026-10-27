@@ -1,9 +1,10 @@
 ---
 const { active = '' } = Astro.props;
 const nav = [
-  ['home', '首页', '/'], ['resources', '资源发现', '/resources/'], ['services', '读者服务', '/services/'],
+  ['home', '首页', '/'], ['news', '新闻公告', '/news/'], ['about', '关于本馆', '/about/'],
+  ['party', '党建工作', '/party-building/'],
+  ['resources', '电子资源', '/resources/'], ['services', '读者服务', '/services/'],
   ['spaces', '空间服务', '/services/#space'], ['learning', '学习支持', '/services/#learning'],
-  ['news', '新闻公告', '/news/'], ['about', '关于本馆', '/about/'],
 ];
 ---
 <header class="site-header">
@@ -13,7 +14,7 @@ const nav = [
     </a>
     <div class="utility-links" aria-label="实用链接">
       <a href="https://dgcu.edu.cn"><span class="material-symbols-outlined">language</span>学校官网</a>
-      <a href="/about/#hours"><span class="material-symbols-outlined">schedule</span>开放时间</a>
+      <a href="/#hours"><span class="material-symbols-outlined">schedule</span>开放时间</a>
       <a href="/services/#remote"><span class="material-symbols-outlined">verified_user</span>校外访问</a>
     </div>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="打开导航"><span class="material-symbols-outlined">menu</span></button>

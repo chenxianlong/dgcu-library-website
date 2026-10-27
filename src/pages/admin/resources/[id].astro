@@ -1,0 +1,26 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { getResource } from '../../../lib/server/content';
+const id = Astro.params.id || 'new'; const isNew = id === 'new';
+const resource = isNew ? null : getResource(id, true);
+if (!isNew && !resource) return Astro.redirect('/admin/resources/');
+const error = Astro.url.searchParams.get('error');
+---
+<AdminLayout title={isNew ? '新建资源' : '编辑资源'} active="resources">
+  <div class="page-title"><div><h1>{isNew ? '新建电子资源' : '编辑电子资源'}</h1><p>保存后资源发现页面立即同步。</p></div><a class="secondary-button" href="/admin/resources/">返回列表</a></div>
+  {error && <p class="form-message form-error">保存失败，请检查必填信息和访问地址。</p>}
+  <form class="edit-form" method="post" action="/admin/api/resources/save">
+    <input type="hidden" name="csrf" value={Astro.locals.csrfToken} /><input type="hidden" name="originalId" value={resource?.id || ''} />
+    <div class="form-main"><section class="form-card"><h2>资源信息</h2>
+      <div class="field"><label for="name">资源名称</label><input id="name" name="name" value={resource?.name || ''} required /></div>
+      <div class="field"><label for="description">资源说明</label><textarea id="description" name="description" required>{resource?.description || ''}</textarea></div>
+      <div class="field"><label for="url">访问地址</label><input id="url" name="url" type="url" value={resource?.url || ''} required /></div>
+    </section></div>
+    <aside class="form-side"><section class="form-card"><h2>分类与发布</h2>
+      <div class="field"><label for="category">资源分类</label><select id="category" name="category">{['中文数据库','外文数据库','电子图书','考试学习','开放资源','试用数据库'].map(value=><option value={value} selected={resource?.category===value}>{value}</option>)}</select></div>
+      <div class="field"><label for="access">访问方式</label><select id="access" name="access">{['校内','VPN','公开'].map(value=><option value={value} selected={resource?.access===value}>{value}</option>)}</select></div>
+      <div class="field"><label for="status">状态</label><select id="status" name="status">{[['published','发布'],['draft','草稿'],['archived','归档']].map(([value,label])=><option value={value} selected={(resource?.status || 'published')===value}>{label}</option>)}</select></div>
+      <label class="check-field"><input type="checkbox" name="featured" checked={resource?.featured} />首页常用资源</label>
+    </section><button class="primary-button" type="submit"><span class="material-symbols-outlined">save</span>保存资源</button></aside>
+  </form>
+</AdminLayout>

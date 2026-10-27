@@ -1,0 +1,13 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { listResources } from '../../../lib/server/content';
+const resources = listResources(true);
+const saved = Astro.url.searchParams.get('saved');
+---
+<AdminLayout title="电子资源" active="resources">
+  <div class="page-title"><div><h1>电子资源</h1><p>管理数据库、电子图书和开放学术资源。</p></div><a class="primary-button" href="/admin/resources/new/"><span class="material-symbols-outlined">add</span>新建资源</a></div>
+  {saved && <p class="form-message">资源已保存。</p>}
+  <section class="admin-panel"><table class="admin-table"><thead><tr><th>资源名称</th><th>分类</th><th>访问方式</th><th>状态</th><th>操作</th></tr></thead><tbody>
+    {resources.map(item=><tr><td><a class="title-link" href={`/admin/resources/${item.id}/`}>{item.name}</a></td><td>{item.category}</td><td>{item.access}</td><td><span class:list={['status-pill',item.status]}>{item.status === 'published' ? '已发布' : item.status === 'draft' ? '草稿' : '已归档'}</span></td><td><a href={`/admin/resources/${item.id}/`}>编辑</a></td></tr>)}
+  </tbody></table></section>
+</AdminLayout>
