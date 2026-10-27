@@ -2,17 +2,32 @@
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import InnerHero from '../../components/InnerHero.astro';
 const vpnGuideUrl = 'https://open.work.weixin.qq.com/wwopen/mpnews?mixuin=nrkvDgAABwBpkJBEAAAUAA&mfid=WW0310-nHwr3wAABwDsiLamd4UFxw5VuEn5c&idx=0&sn=7c333b35c664fc6de2eb9f730e1089f6&version=5.0.10.6015&platform=win';
+const searchProofUrl = 'https://open.work.weixin.qq.com/wwopen/mpnews?mixuin=nrkvDgAABwC7Sui5AAAUAA&mfid=WW0319-5keDXAAABwCWsx4lrQ7LTwFbzQpaa&idx=0&sn=38d2f7789dcbf49d1fd091daaa2f90a2';
+const literatureDeliveryUrl = 'http://www.ucdrs.cn/area/dgcsxytsg';
 const readerUrl = 'http://10.20.208.253/opac/reader/space';
 const groups = [
   { id:'borrow', icon:'menu_book', title:'借阅服务', text:'查询馆藏和个人借阅状态，了解借阅权限与续借服务。', links:[{ label:'馆藏检索', href:'http://10.20.208.253/opac' },{ label:'借阅规则', href:'/about/#borrow-rules' },{ label:'图书续借', href:readerUrl }] },
   { id:'remote', icon:'shield_lock', title:'校外访问', text:'通过学校提供的远程访问方式使用图书馆电子资源。', links:[{ label:'VPN 使用指南', href:vpnGuideUrl },{ label:'电子资源目录', href:'/resources/' }] },
   { id:'space', icon:'meeting_room', title:'空间服务', text:'查看馆内空间与馆藏分布、当前开放安排。', links:[{ label:'馆内空间导览', href:'/about/#floors' },{ label:'开放时间', href:'/#hours' },{ label:'咨询空间使用', href:'mailto:library@dgcu.edu.cn' }] },
   { id:'learning', icon:'school', title:'学习支持', text:'通过电子资源和图书馆资讯获取学习与研究支持。', links:[{ label:'电子资源目录', href:'/resources/' },{ label:'考试学习资源', href:'/resources/#collection-resource-title' },{ label:'最新活动与培训', href:'/news/' }] },
-  { id:'reference', icon:'support_agent', title:'咨询与参考', text:'遇到检索或资源使用问题，可联系图书馆。', links:[{ label:'邮件咨询', href:'mailto:library@dgcu.edu.cn' },{ label:'电话咨询', href:'tel:076923382676' },{ label:'联系本馆', href:'/about/#contact' }] },
+  { id:'reference', icon:'support_agent', title:'咨询与参考', text:'获取检索证明、文献传递服务，或通过企业微信联系图书馆。', links:[{ label:'检索证明', href:searchProofUrl },{ label:'文献传递', href:literatureDeliveryUrl },{ label:'联系本馆', href:'#contact-dialog', modal:true }] },
   { id:'account', icon:'account_circle', title:'我的图书馆', text:'进入读者账户，查看个人借阅与续借信息。', links:[{ label:'登录读者账户', href:readerUrl },{ label:'借阅记录', href:readerUrl },{ label:'预约记录', href:readerUrl }] },
 ];
 ---
 <SiteLayout title="读者服务" description="图书馆借阅、空间、学习与咨询服务" active="services">
   <InnerHero eyebrow="READER SERVICES" title="读者服务" description="围绕借、读、学、研的全过程，为师生提供清晰便捷的服务入口。" icon="support_agent" />
-  <section class="inner-section page-shell"><div class="service-cards">{groups.map((group) => <article class="service-card" id={group.id}><span class="material-symbols-outlined">{group.icon}</span><h2>{group.title}</h2><p>{group.text}</p><ul>{group.links.map((link) => <li><a href={link.href}><span>{link.label}</span><span aria-hidden="true">›</span></a></li>)}</ul></article>)}</div></section>
+  <section class="inner-section page-shell"><div class="service-cards">{groups.map((group) => <article class="service-card" id={group.id}><span class="material-symbols-outlined">{group.icon}</span><h2>{group.title}</h2><p>{group.text}</p><ul>{group.links.map((link) => <li>{'modal' in link && link.modal ? <button type="button" data-contact-open><span>{link.label}</span><span aria-hidden="true">›</span></button> : <a href={link.href}><span>{link.label}</span><span aria-hidden="true">›</span></a>}</li>)}</ul></article>)}</div></section>
+  <dialog id="contact-dialog" class="contact-dialog" aria-labelledby="contact-dialog-title">
+    <h2 id="contact-dialog-title">联系本馆</h2>
+    <p>请通过企业微信联系图书馆肖琴或者梁艳敏老师。</p>
+    <button type="button" data-contact-close>知道了</button>
+  </dialog>
+  <script>
+    const dialog = document.querySelector<HTMLDialogElement>('#contact-dialog');
+    document.querySelector<HTMLButtonElement>('[data-contact-open]')?.addEventListener('click', () => {
+      if (dialog?.showModal) dialog.showModal();
+      else window.alert('请通过企业微信联系图书馆肖琴或者梁艳敏老师。');
+    });
+    dialog?.querySelector<HTMLButtonElement>('[data-contact-close]')?.addEventListener('click', () => dialog.close());
+  </script>
 </SiteLayout>
