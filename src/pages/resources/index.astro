@@ -3,7 +3,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import InnerHero from '../../components/InnerHero.astro';
 import { listResources } from '../../lib/server/content';
 const resources = listResources();
-const purchasedIds = ['cnki', 'chaoxing-digital-books', 'duxiu', 'emerald', 'met-english', 'yinfu-remote', 'yinfu-local', 'guoyan', 'youyue-foreign-books'];
+const purchasedIds = ['cnki', 'ncpssd', 'chaoxing-digital-books', 'duxiu', 'emerald', 'met-english', 'yinfu-remote', 'yinfu-local', 'guoyan', 'youyue-foreign-books'];
 const trialIds = ['trial-legacy-672', 'trial-zhiyuebook', 'trial-legacy-677'];
 const resourceById = new Map(resources.map((resource) => [resource.id, resource]));
 const collectionResources = purchasedIds.map((id) => resourceById.get(id)).filter((resource) => resource !== undefined);
