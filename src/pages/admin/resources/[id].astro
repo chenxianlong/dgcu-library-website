@@ -5,9 +5,10 @@ const id = Astro.params.id || 'new'; const isNew = id === 'new';
 const resource = isNew ? null : getResource(id, true);
 if (!isNew && !resource) return Astro.redirect('/admin/resources/');
 const error = Astro.url.searchParams.get('error');
+const isTrial = resource?.category === '试用数据库';
 ---
 <AdminLayout title={isNew ? '新建资源' : '编辑资源'} active="resources">
-  <div class="page-title"><div><h1>{isNew ? '新建电子资源' : '编辑电子资源'}</h1><p>保存后资源发现页面立即同步。</p></div><a class="secondary-button" href="/admin/resources/">返回列表</a></div>
+  <div class="page-title"><div><h1>{isNew ? '新建电子资源' : '编辑电子资源'}</h1><p>保存后自动同步到前台“馆藏数据库”或“试用数据库”。</p></div><a class="secondary-button" href="/admin/resources/">返回列表</a></div>
   {error && <p class="form-message form-error">保存失败，请检查必填信息和访问地址。</p>}
   <form class="edit-form" method="post" action="/admin/api/resources/save">
     <input type="hidden" name="csrf" value={Astro.locals.csrfToken} /><input type="hidden" name="originalId" value={resource?.id || ''} />
@@ -17,10 +18,23 @@ const error = Astro.url.searchParams.get('error');
       <div class="field"><label for="url">访问地址</label><input id="url" name="url" type="url" value={resource?.url || ''} required /></div>
     </section></div>
     <aside class="form-side"><section class="form-card"><h2>分类与发布</h2>
-      <div class="field"><label for="category">资源分类</label><select id="category" name="category">{['中文数据库','外文数据库','电子图书','考试学习','开放资源','试用数据库'].map(value=><option value={value} selected={resource?.category===value}>{value}</option>)}</select></div>
+      <div class="field"><label for="resourceType">资源栏目</label><select id="resourceType" name="resourceType" data-resource-type><option value="collection" selected={!isTrial}>馆藏数据库</option><option value="trial" selected={isTrial}>试用数据库</option></select><small>决定资源在前台左栏或右栏展示。</small></div>
+      <div class="field" data-collection-category hidden={isTrial}><label for="collectionCategory">馆藏细分类</label><select id="collectionCategory" name="collectionCategory" disabled={isTrial}>{['中文数据库','外文数据库','电子图书','考试学习','开放资源'].map(value=><option value={value} selected={(resource?.category || '中文数据库')===value}>{value}</option>)}</select></div>
       <div class="field"><label for="access">访问方式</label><select id="access" name="access">{['校内','VPN','公开'].map(value=><option value={value} selected={resource?.access===value}>{value}</option>)}</select></div>
       <div class="field"><label for="status">状态</label><select id="status" name="status">{[['published','发布'],['draft','草稿'],['archived','归档']].map(([value,label])=><option value={value} selected={(resource?.status || 'published')===value}>{label}</option>)}</select></div>
       <label class="check-field"><input type="checkbox" name="featured" checked={resource?.featured} />首页常用资源</label>
     </section><button class="primary-button" type="submit"><span class="material-symbols-outlined">save</span>保存资源</button></aside>
   </form>
 </AdminLayout>
+<script>
+  const resourceType = document.querySelector<HTMLSelectElement>('[data-resource-type]');
+  const collectionField = document.querySelector<HTMLElement>('[data-collection-category]');
+  const collectionCategory = collectionField?.querySelector<HTMLSelectElement>('select');
+  const updateResourceType = () => {
+    const trial = resourceType?.value === 'trial';
+    if (collectionField) collectionField.hidden = trial;
+    if (collectionCategory) collectionCategory.disabled = trial;
+  };
+  resourceType?.addEventListener('change', updateResourceType);
+  updateResourceType();
+</script>

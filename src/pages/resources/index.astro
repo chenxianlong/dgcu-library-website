@@ -5,9 +5,17 @@ import { listResources } from '../../lib/server/content';
 const resources = listResources();
 const purchasedIds = ['cnki', 'ncpssd', 'chaoxing-digital-books', 'duxiu', 'emerald', 'met-english', 'yinfu-remote', 'yinfu-local', 'guoyan', 'youyue-foreign-books'];
 const trialIds = ['trial-pkulaw', 'trial-legacy-715', 'trial-wiley-online-library', 'trial-legacy-738', 'trial-legacy-740', 'trial-legacy-672', 'trial-zhiyuebook', 'trial-legacy-677'];
-const resourceById = new Map(resources.map((resource) => [resource.id, resource]));
-const collectionResources = purchasedIds.map((id) => resourceById.get(id)).filter((resource) => resource !== undefined);
-const trialResources = trialIds.map((id) => resourceById.get(id)).filter((resource) => resource !== undefined);
+const orderResources = (items: typeof resources, preferredIds: string[]) => {
+  const preferredOrder = new Map(preferredIds.map((id, index) => [id, index]));
+  return [...items].sort((a, b) => {
+    const aOrder = preferredOrder.get(a.id);
+    const bOrder = preferredOrder.get(b.id);
+    if (aOrder !== undefined || bOrder !== undefined) return (aOrder ?? Number.MAX_SAFE_INTEGER) - (bOrder ?? Number.MAX_SAFE_INTEGER);
+    return a.name.localeCompare(b.name, 'zh-CN');
+  });
+};
+const collectionResources = orderResources(resources.filter((resource) => resource.category !== '试用数据库'), purchasedIds);
+const trialResources = orderResources(resources.filter((resource) => resource.category === '试用数据库'), trialIds);
 const collectionCategories = ['全部', ...new Set(collectionResources.map((item) => item.category))];
 ---
 <SiteLayout title="电子资源" description="数据库、电子图书与开放学术资源" active="resources">
