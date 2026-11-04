@@ -20,10 +20,10 @@ const resources = purchasedResourceIds.map((id) => resourceById.get(id)).filter(
 const serviceHours = getServiceHours();
 
 const learning = [
-  { icon: 'school', title: '新生指南', detail: '入馆指引与使用攻略' },
-  { icon: 'quiz', title: '考试题库', detail: '考研考证备考资源' },
-  { icon: 'play_circle', title: 'MOOC资源', detail: '精品课程在线学习' },
-  { icon: 'library_books', title: '数据库培训', detail: '讲座与培训报名' },
+  { icon: 'school', title: '新生指南', detail: '入馆指引与使用攻略', href: '/services/#learning' },
+  { icon: 'quiz', title: '考试题库', detail: '考研考证备考资源', href: '/services/#learning' },
+  { icon: 'play_circle', title: 'MOOC资源', detail: '精品课程在线学习', href: 'https://higher.smartedu.cn/' },
+  { icon: 'library_books', title: '数据库培训', detail: '讲座与培训报名', href: '/services/#learning' },
 ];
 
 const newsFallbacks = ['/images/news-anniversary.jpg','/images/news-ai-education.jpg','/images/news-campus.jpg','/images/library-campus.jpg'];
@@ -140,7 +140,7 @@ const news = latestArticles.slice(0,4).map((article,index)=>({ ...article, image
           <h2><span class="material-symbols-outlined">school</span>新生与学习支持</h2>
           <div class="learning-grid">
             {learning.map((item) => (
-              <a href="/services/#learning">
+              <a href={item.href}>
                 <span class="material-symbols-outlined">{item.icon}</span>
                 <span><strong>{item.title}</strong><small>{item.detail}</small></span>
               </a>
