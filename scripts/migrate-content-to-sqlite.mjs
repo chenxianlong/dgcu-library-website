@@ -65,4 +65,14 @@ if (existsSync(trialResourceFile)) {
     resources++;
   }
 }
+
+const openAccessResourceFile = resolve(root, 'migration/open-access-resources.yaml');
+if (existsSync(openAccessResourceFile)) {
+  const openAccessResources = YAML.parse(readFileSync(openAccessResourceFile, 'utf8'));
+  for (const data of openAccessResources) {
+    const id = String(data.id);
+    insertResource.run(id,String(data.name||id),String(data.description||''),String(data.url||''),'开放资源','公开',0,'published',now,now);
+    resources++;
+  }
+}
 console.log(`Migrated ${articles} article files and ${resources} resources into ${databasePath}`);

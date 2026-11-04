@@ -9,10 +9,11 @@ export const POST: APIRoute = async (context) => {
   if (!name || !description || !/^https?:\/\//i.test(url)) return context.redirect(`/admin/resources/${originalId || 'new'}/?error=validation`,303);
   let id = originalId || slugify(name) || `resource-${Date.now()}`; if (!originalId && getResource(id,true)) id = `${id}-${Date.now().toString(36)}`;
   const status = ['published','draft','archived'].includes(text(form,'status',20)) ? text(form,'status',20) : 'draft';
-  const resourceType = text(form,'resourceType',20) === 'trial' ? 'trial' : 'collection';
-  const allowedCollectionCategories = ['中文数据库','外文数据库','电子图书','考试学习','开放资源'];
+  const requestedResourceType = text(form,'resourceType',20);
+  const resourceType = ['trial','open'].includes(requestedResourceType) ? requestedResourceType : 'collection';
+  const allowedCollectionCategories = ['中文数据库','外文数据库','电子图书','考试学习'];
   const requestedCategory = text(form,'collectionCategory',40);
-  const category = resourceType === 'trial' ? '试用数据库' : allowedCollectionCategories.includes(requestedCategory) ? requestedCategory : '中文数据库';
+  const category = resourceType === 'trial' ? '试用数据库' : resourceType === 'open' ? '开放资源' : allowedCollectionCategories.includes(requestedCategory) ? requestedCategory : '中文数据库';
   const requestedAccess = text(form,'access',20);
   const access = ['校内','VPN','公开'].includes(requestedAccess) ? requestedAccess : '校内';
   saveResource({ id,name,description,url,category,access,featured:form.get('featured')==='on',status });
