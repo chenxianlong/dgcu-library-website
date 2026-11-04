@@ -40,7 +40,7 @@ for (const file of filesUnder(articleRoot).filter((item) => ['.md','.mdoc'].incl
 
 const resourceRoot = resolve(root, 'src/content/resources');
 const purchasedResourceIds = new Set(['cnki', 'ncpssd', 'chaoxing-digital-books', 'duxiu', 'emerald', 'met-english', 'yinfu-remote', 'yinfu-local', 'guoyan', 'youyue-foreign-books']);
-const currentTrialIds = new Set(['trial-legacy-672', 'trial-zhiyuebook', 'trial-legacy-677']);
+const currentTrialIds = new Set(['trial-pkulaw', 'trial-legacy-715', 'trial-wiley-online-library', 'trial-legacy-738', 'trial-legacy-740', 'trial-legacy-672', 'trial-zhiyuebook', 'trial-legacy-677']);
 const insertResource = db.prepare(`INSERT OR IGNORE INTO resources (id,name,description,url,category,access,featured,status,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?,?)`);
 let resources = 0;
 for (const file of filesUnder(resourceRoot).filter((item) => ['.yaml','.yml'].includes(extname(item)))) {

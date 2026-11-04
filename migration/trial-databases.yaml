@@ -1,3 +1,17 @@
+- id: trial-pkulaw
+  name: 北大法宝
+  description: 提供法律法规、司法案例、法学期刊及法律实务资料的专业检索服务。
+  url: https://www.pkulaw.com/
+  category: 试用数据库
+  access: 校内
+  featured: false
+- id: trial-wiley-online-library
+  name: Wiley在线期刊数据库
+  description: 提供 Wiley 出版的多学科在线学术期刊检索与阅读服务。
+  url: https://onlinelibrary.wiley.com/
+  category: 试用数据库
+  access: 校内
+  featured: false
 - id: trial-zhiyuebook
   name: 知阅在线电子书平台
   description: 电子工业出版社电子书平台，提供电子工业出版社出版的电子书资源在线检索与阅读服务。
@@ -7,21 +21,21 @@
   featured: false
 - id: trial-legacy-740
   name: 阅途美育在线
-  description: 专为高校与公共文化机构打造的美育资源平台，涵盖美育学堂、艺术鉴赏、美育图书、AI 创作和数字展馆等内容。旧站记录试用期限至 2025 年 12 月 31 日，校外访问需使用在校园网内注册的个人账号。
+  description: 提供美育课程、艺术鉴赏、美育图书和数字展馆等资源。
   url: https://www.myu100.com/
   category: 试用数据库
   access: VPN
   featured: false
 - id: trial-legacy-738
-  name: 设计师之家数字图书馆
-  description: 集数字教程、电子图书、期刊、设计素材、AI 绘画和数字展馆于一体的艺术设计知识服务平台。旧站记录试用期限至 2025 年 12 月 31 日，校外访问需使用在校园网内注册的个人账号。
+  name: 设计师之家
+  description: 提供艺术设计教程、电子图书、期刊、设计素材和数字展馆等资源。
   url: https://www.51sjsj.com/
   category: 试用数据库
   access: VPN
   featured: false
 - id: trial-legacy-715
   name: 燕递文献服务系统
-  description: 整合海外电子书、期刊、预印本、视频和指南等外文资源，提供检索、获取、推送、订阅与翻译服务。旧站记录试用期限至 2025 年 10 月 31 日，首次使用需注册并选择“东莞城市学院”。
+  description: 整合海外电子书、期刊、预印本等外文资源，提供文献检索与传递服务。
   url: https://www.yandilib.com/
   category: 试用数据库
   access: 公开
