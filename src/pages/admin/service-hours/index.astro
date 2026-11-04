@@ -1,0 +1,49 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { getServiceHours } from '../../../lib/server/settings';
+
+const setting = getServiceHours();
+const saved = Astro.url.searchParams.get('saved');
+const error = Astro.url.searchParams.get('error');
+---
+<AdminLayout title="开放时间" active="service-hours">
+  <div class="page-title">
+    <div><h1>今日服务</h1><p>设置首页显示的开放时间；节假日或临时调整时，可在这里直接更新。</p></div>
+  </div>
+  <section class="form-card" style="max-width:760px">
+    {saved && <p class="form-message">开放时间已更新，首页立即生效。</p>}
+    {error && <p class="form-message form-error">保存失败，请检查时间、状态文案和详情链接。</p>}
+    <form method="post" action="/admin/api/service-hours/save">
+      <input type="hidden" name="csrf" value={Astro.locals.csrfToken} />
+      <div class="field">
+        <label for="display">开放时间</label>
+        <input id="display" name="display" value={setting.display} maxlength="60" required />
+        <small>可填写“08:30–23:00”“闭馆”或节假日期间的特殊时间段。</small>
+      </div>
+      <div class="field">
+        <label for="status">开放状态</label>
+        <select id="status" name="status">
+          <option value="normal" selected={setting.status === 'normal'}>正常开放（绿色）</option>
+          <option value="special" selected={setting.status === 'special'}>时间调整（橙色）</option>
+          <option value="closed" selected={setting.status === 'closed'}>闭馆（红色）</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="statusText">状态文案</label>
+        <input id="statusText" name="statusText" value={setting.statusText} maxlength="40" required />
+        <small>例如“正常开放”“暑假开放安排”“今日闭馆”。</small>
+      </div>
+      <div class="field">
+        <label for="note">补充说明</label>
+        <input id="note" name="note" value={setting.note} maxlength="160" />
+        <small>显示在状态下方，可填写开放区域或临时说明。</small>
+      </div>
+      <div class="field">
+        <label for="detailUrl">详细安排链接</label>
+        <input id="detailUrl" name="detailUrl" value={setting.detailUrl} maxlength="500" placeholder="/news/ 或 https://…" />
+        <small>可链接到节假日开放通知；留空时默认进入新闻公告。</small>
+      </div>
+      <button class="primary-button" type="submit">保存并更新首页</button>
+    </form>
+  </section>
+</AdminLayout>

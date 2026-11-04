@@ -1,0 +1,21 @@
+import type { APIRoute } from 'astro';
+import { audit, verifyCsrf } from '../../../../lib/server/auth';
+import { getResource, saveResource, slugify } from '../../../../lib/server/content';
+const text = (form: FormData, name: string, max = 10000) => String(form.get(name) || '').trim().slice(0, max);
+export const POST: APIRoute = async (context) => {
+  const form = await context.request.formData();
+  if (!verifyCsrf(context, form.get('csrf'))) return new Response('Invalid CSRF token', { status: 403 });
+  const originalId = text(form,'originalId',120); const name = text(form,'name',200); const description = text(form,'description',4000); const url = text(form,'url',1000);
+  if (!name || !description || !/^https?:\/\//i.test(url)) return context.redirect(`/admin/resources/${originalId || 'new'}/?error=validation`,303);
+  let id = originalId || slugify(name) || `resource-${Date.now()}`; if (!originalId && getResource(id,true)) id = `${id}-${Date.now().toString(36)}`;
+  const status = ['published','draft','archived'].includes(text(form,'status',20)) ? text(form,'status',20) : 'draft';
+  const resourceType = text(form,'resourceType',20) === 'trial' ? 'trial' : 'collection';
+  const allowedCollectionCategories = ['中文数据库','外文数据库','电子图书','考试学习','开放资源'];
+  const requestedCategory = text(form,'collectionCategory',40);
+  const category = resourceType === 'trial' ? '试用数据库' : allowedCollectionCategories.includes(requestedCategory) ? requestedCategory : '中文数据库';
+  const requestedAccess = text(form,'access',20);
+  const access = ['校内','VPN','公开'].includes(requestedAccess) ? requestedAccess : '校内';
+  saveResource({ id,name,description,url,category,access,featured:form.get('featured')==='on',status });
+  audit(context.locals.admin!.id, originalId ? 'update' : 'create', 'resource', id, name);
+  return context.redirect('/admin/resources/?saved=1',303);
+};

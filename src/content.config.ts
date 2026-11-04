@@ -5,9 +5,10 @@ import { z } from 'astro/zod';
 const articles = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdoc}', base: './src/content/articles' }),
   schema: z.object({
+    id: z.string().optional(),
     title: z.string(),
     date: z.coerce.date().transform((value) => value.toISOString().slice(0, 10)),
-    category: z.enum(['通知公告', '新闻动态', '活动预告', '获奖通知']),
+    category: z.enum(['通知公告', '新闻动态', '活动预告', '获奖通知', '党建工作']),
     summary: z.string(),
     cover: z.string().optional(),
     featured: z.boolean().default(false),
@@ -22,7 +23,7 @@ const resources = defineCollection({
     name: z.string(),
     description: z.string(),
     url: z.string(),
-    category: z.enum(['中文数据库', '外文数据库', '电子图书', '考试学习', '开放资源', '试用资源']),
+    category: z.enum(['中文数据库', '外文数据库', '电子图书', '考试学习', '开放资源', '试用资源', '试用数据库']),
     access: z.enum(['校内', 'VPN', '公开']),
     featured: z.boolean().default(false),
   }),

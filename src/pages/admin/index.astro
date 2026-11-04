@@ -1,0 +1,22 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { getDatabase } from '../../lib/server/db';
+const db = getDatabase();
+const articleStats = db.prepare(`SELECT COUNT(*) total, SUM(status='published') published, SUM(status='draft') drafts FROM articles`).get() as Record<string, number>;
+const resourceStats = db.prepare(`SELECT COUNT(*) total FROM resources`).get() as Record<string, number>;
+const recent = db.prepare(`SELECT id,title,date,status,updated_at FROM articles ORDER BY updated_at DESC LIMIT 8`).all() as Record<string, string>[];
+---
+<AdminLayout title="工作台" active="dashboard">
+  <div class="page-title"><div><h1>工作台</h1><p>欢迎回来，{Astro.locals.admin?.displayName}。这里是网站内容的实时概览。</p></div></div>
+  <section class="stat-grid" aria-label="内容统计">
+    <article class="stat-card"><span>新闻与公告</span><strong>{articleStats.total || 0}</strong></article>
+    <article class="stat-card"><span>已发布内容</span><strong>{articleStats.published || 0}</strong></article>
+    <article class="stat-card"><span>电子资源</span><strong>{resourceStats.total || 0}</strong></article>
+  </section>
+  <section class="admin-panel" style="margin-top:20px">
+    <div class="panel-header"><h2>最近更新</h2><a class="secondary-button" href="/admin/articles/new/">新建内容</a></div>
+    <table class="admin-table"><thead><tr><th>标题</th><th>发布日期</th><th>状态</th><th>最后修改</th></tr></thead><tbody>
+      {recent.map((item) => <tr><td><a class="title-link" href={`/admin/articles/${item.id}/`}>{item.title}</a></td><td>{item.date}</td><td><span class:list={['status-pill',item.status]}>{item.status === 'published' ? '已发布' : item.status === 'draft' ? '草稿' : '已归档'}</span></td><td>{item.updated_at.slice(0,16).replace('T',' ')}</td></tr>)}
+    </tbody></table>
+  </section>
+</AdminLayout>

@@ -1,0 +1,19 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+const saved = Astro.url.searchParams.get('saved');
+const error = Astro.url.searchParams.get('error');
+---
+<AdminLayout title="账号安全" active="account">
+  <div class="page-title"><div><h1>账号安全</h1><p>修改当前管理员账号的登录密码。</p></div></div>
+  <section class="form-card" style="max-width:620px">
+    {saved && <p class="form-message">密码修改成功，其他登录会话已失效。</p>}
+    {error && <p class="form-message form-error">{error === 'current' ? '当前密码不正确。' : '新密码至少 12 位，并需要同时包含字母和数字。'}</p>}
+    <form method="post" action="/admin/api/account/password">
+      <input type="hidden" name="csrf" value={Astro.locals.csrfToken} />
+      <div class="field"><label for="currentPassword">当前密码</label><input id="currentPassword" name="currentPassword" type="password" autocomplete="current-password" required /></div>
+      <div class="field"><label for="newPassword">新密码</label><input id="newPassword" name="newPassword" type="password" autocomplete="new-password" minlength="12" required /><small>至少 12 位，同时包含字母和数字。</small></div>
+      <div class="field"><label for="confirmPassword">确认新密码</label><input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" minlength="12" required /></div>
+      <button class="primary-button" type="submit">更新密码</button>
+    </form>
+  </section>
+</AdminLayout>
