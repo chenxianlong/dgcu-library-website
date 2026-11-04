@@ -13,7 +13,7 @@ const { value = '', csrfToken } = Astro.props;
   <textarea id="content" name="content" aria-label="正文 Markdown 源码" required>{value}</textarea>
   <input class="sr-only" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple data-editor-image-input />
   <div class="markdown-editor-help">
-    <span><span class="material-symbols-outlined" aria-hidden="true">info</span>图片会插入到当前光标位置；选中文字后可设置居中或右对齐。</span>
+    <span><span class="material-symbols-outlined" aria-hidden="true">info</span>图片会插入到当前光标位置；选中段落可设置字号、首行缩进、居中或右对齐。</span>
     <span data-upload-status aria-live="polite"></span>
   </div>
 </div>
@@ -47,6 +47,31 @@ const { value = '', csrfToken } = Astro.props;
     cm.focus();
   };
 
+  const wrapSelectionOrLine = (editor: EasyMDE, openingTag: string, closingTag: string, placeholder: string) => {
+    const cm = editor.codemirror;
+    const selected = cm.getSelection();
+    const cursor = cm.getCursor();
+    const line = cm.getLine(cursor.line);
+    const content = selected || line || placeholder;
+    const replacement = `${openingTag}\n\n${content}\n\n${closingTag}`;
+    if (selected) {
+      cm.replaceSelection(replacement);
+    } else if (line) {
+      cm.replaceRange(replacement, { line: cursor.line, ch: 0 }, { line: cursor.line, ch: line.length });
+    } else {
+      cm.replaceSelection(replacement);
+    }
+    cm.focus();
+  };
+
+  const insertIndent = (editor: EasyMDE) => {
+    wrapSelectionOrLine(editor, '{% indent %}', '{% /indent %}', '段落文字');
+  };
+
+  const insertFontSize = (editor: EasyMDE, size: string) => {
+    wrapSelectionOrLine(editor, `{% fontsize size="${size}" %}`, '{% /fontsize %}', '段落文字');
+  };
+
   const translatedTitles: Record<string, string> = {
     Bold: '粗体', Italic: '斜体', Heading: '标题', Quote: '引用',
     'Generic List': '无序列表', 'Numbered List': '有序列表',
@@ -75,6 +100,12 @@ const { value = '', csrfToken } = Astro.props;
       className: 'fa fa-align-center',
       title: '居中对齐',
     };
+    const indentButton: EditorToolbarButton = {
+      name: 'indent-first-line',
+      action: insertIndent,
+      className: 'fa fa-indent-first-line',
+      title: '首行缩进 2 字符',
+    };
     const alignRightButton: EditorToolbarButton = {
       name: 'align-right',
       action: (editor) => insertAlignment(editor, 'right'),
@@ -97,7 +128,7 @@ const { value = '', csrfToken } = Astro.props;
         'bold', 'italic', 'heading', '|',
         'quote', 'unordered-list', 'ordered-list', '|',
         'link', imageButton, 'table', 'horizontal-rule', '|',
-        alignCenterButton, alignRightButton, '|',
+        indentButton, alignCenterButton, alignRightButton, '|',
         'preview', 'side-by-side', 'fullscreen', '|', 'guide',
       ],
     });
@@ -109,6 +140,21 @@ const { value = '', csrfToken } = Astro.props;
         button.setAttribute('aria-label', translatedTitles[current]);
       }
     });
+
+    const toolbar = shell.querySelector<HTMLElement>('.editor-toolbar');
+    const indentControl = toolbar?.querySelector<HTMLElement>('.fa-indent-first-line');
+    if (toolbar && indentControl) {
+      const fontSizeSelect = document.createElement('select');
+      fontSizeSelect.className = 'editor-font-size-select';
+      fontSizeSelect.title = '设置所选段落字号';
+      fontSizeSelect.setAttribute('aria-label', '设置所选段落字号');
+      fontSizeSelect.innerHTML = '<option value="">字号</option><option value="14">14px 小</option><option value="16">16px 标准</option><option value="18">18px 大</option><option value="20">20px 较大</option><option value="24">24px 特大</option>';
+      fontSizeSelect.addEventListener('change', () => {
+        if (fontSizeSelect.value) insertFontSize(editor, fontSizeSelect.value);
+        fontSizeSelect.value = '';
+      });
+      toolbar.insertBefore(fontSizeSelect, indentControl);
+    }
 
     imageInput.addEventListener('change', async () => {
       const files = Array.from(imageInput.files || []);
