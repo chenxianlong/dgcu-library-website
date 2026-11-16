@@ -1,0 +1,32 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import InnerHero from '../../components/InnerHero.astro';
+const services = [
+  { icon: 'support_agent', title: '图书馆咨询', text: '提供借阅规则、阅读推荐、图书馆资源使用与文献检索指导。', example: '东莞城市学院学生能借几本书？' },
+  { icon: 'local_library', title: '本馆纸质馆藏', text: '实时查询东莞城市学院图书馆馆藏，了解索书号、馆藏地点与可借册数。', example: '帮我找本馆关于人工智能的图书。' },
+  { icon: 'account_balance', title: '东莞图书馆馆藏', text: '查询东莞图书馆公开馆藏，拓展找书范围；入馆与借阅资格以该馆规定为准。', example: '东莞图书馆有没有《三体》？' },
+  { icon: 'auto_stories', title: '双平台电子书检索', text: '同时实时检索人民邮电出版社与电子工业出版社知阅官网，提供对应阅读入口。', example: '查找关于 Claude Code 的电子书。' },
+];
+---
+<SiteLayout title="AI馆员" description="东莞城市学院图书馆 AI 馆员：咨询、馆藏查询与电子书检索" active="ai-librarian">
+  <InnerHero eyebrow="AI LIBRARIAN" title="AI馆员" description="从一个问题开始，发现适合您的图书与学习资源。" icon="smart_toy" />
+  <section class="inner-section page-shell">
+    <div class="panel" style="padding:28px;margin-bottom:26px">
+      <h2>东莞城市学院图书馆 AI 馆员</h2>
+      <p style="line-height:1.9">面向读者提供远程图书馆咨询、实时纸质馆藏与双平台电子书检索。通过支持技能的 AI 助手使用，无需学校账号、企业微信登录、API Key 或本地大模型配置。</p>
+    </div>
+    <div class="service-cards">{services.map(service => <article class="service-card">
+      <span class="material-symbols-outlined">{service.icon}</span><h2>{service.title}</h2><p>{service.text}</p>
+      <blockquote style="margin:16px 0 0;padding:14px;background:#f3f7f4;border-radius:8px;line-height:1.8">试着问：{service.example}</blockquote>
+    </article>)}</div>
+    <div class="panel prose" style="padding:28px;margin-top:26px">
+      <h2>如何使用</h2>
+      <ol><li>在支持 Skill 的 AI 助手中安装“东莞城市学院图书馆 AI 馆员”技能。</li><li>输入问题、书名、作者、ISBN 或主题词，例如“帮我找人工智能方面的书”。</li><li>根据检索结果查看索书号、馆藏地点、可借情况或电子书阅读链接。</li></ol>
+      <p><a href="https://skillhub.cn/skills/indiv-dgcu/dgcu-library-librarian" target="_blank" rel="noopener noreferrer">查看技能详情与安装方式 ↗</a>　<a href="https://github.com/chenxianlong/dgcu-library-librarian-skill" target="_blank" rel="noopener noreferrer">开源项目与使用说明 ↗</a></p>
+      <h2>使用提示</h2>
+      <p>电子书阅读与纸质书借阅权限以各馆及出版社规定为准。检索失败不代表没有相关图书；可借数量未确认时，请以馆藏系统实时信息为准。</p>
+      <p>请仅提交咨询问题或检索词，不要提交密码、证件号或借阅账号。AI 咨询问题会交由图书馆配置的模型服务处理。</p>
+      <p>公开服务每个来源 IP 每 10 分钟最多 20 次、每日最多 100 次；校园网共用出口可能共享额度。遇到限流请至少等待 10 分钟再使用。</p>
+    </div>
+  </section>
+</SiteLayout>
