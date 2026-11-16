@@ -1,0 +1,23 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+const magazines = [
+  { name:'MIT Technology Review（麻省理工科技评论）', category:'科技与未来', text:'了解全球科技趋势与商业伦理，深入探讨技术背后的社会影响，包括克隆技术、机器人学习与 AI 伦理。适合科技从业者、投资人及希望洞察未来趋势的读者。', links:[['访问网站','https://www.mittrchina.com/']] },
+  { name:'三联生活周刊', category:'社会与文化', text:'深度报道社会变迁与文化思潮，关注科学与公共议题的交叉。文档推荐其“大科学时代”专题，涉及江门中微子实验、FAST 等科学设施。', links:[['访问网站','https://www.lifeweek.com.cn/']] },
+  { name:'三联中读 App', category:'知识与思辨', text:'《三联生活周刊》官方知识服务平台，由三联生活传媒有限公司开发。提供《三联生活周刊》《读书》《爱乐》《少年》等刊物数字内容及配套播客，涵盖读书新知、生活美学、艺术音乐、历史地理、心理教育等领域的音频课程、专栏与训练营。', links:[['课程网站','https://www.lifeweek.com.cn/course'],['App 网站','http://www.slzhongdu.com/']] },
+  { name:'财新周刊', category:'财经与产业', text:'面向金融、经济、产业与投资领域的读者，关注经济金融、产业发展和社会议题，提供新闻报道、深度调查与分析。', links:[['访问网站','https://weekly.caixin.com/']] },
+  { name:'经济学人', category:'全球视野', text:'聚焦全球政治、经济、商业、金融、科技与文化。文章多采用匿名发表方式，强调统一的编辑立场与集体声音。', links:[['英文网站','https://www.economist.com/'],['中文阅读参考（第三方）','https://economist.buzzing.cc/']] },
+  { name:'环球科学', category:'前沿科学', text:'美国《Scientific American》的中文版，关注前沿科学，翻译与编排成熟，可通过纸刊或电子订阅阅读。', links:[['访问网站','https://www.huanqiukexue.com/']] },
+  { name:'科学世界', category:'图解科学', text:'引进自日本 Newton 杂志，以精美图表和科学可视化见长。普及科学技术知识，介绍新技术与新学科，倡导科学方法与思维，适合喜欢图解科学的读者。', links:[['访问网站','http://www.kxsj.com/']] },
+  { name:'知识分子', category:'科学与公共议题', text:'由饶毅、鲁白、谢宇三位学者发起，关注科学政策、科研界动态与生物医学，呈现具有公共性的科学讨论。', links:[['访问网站','https://zhishifenzi.com/']] },
+  { name:'万物', category:'青少年科普', text:'源自英国科普杂志《How It Works》的中文青少年科普期刊，由中国大百科全书出版社和《知识就是力量》杂志社引进。面向 8—15 岁读者及家庭，涵盖太空探索、工程科技、生命科学、地球生态、交通运输、建筑考古与信息技术，以全彩大16开、跨界叙事和高清解剖图解呈现内容。', links:[['访问网站','https://www.wanwuweb.com/']] },
+  { name:'世界社会科学', category:'人文社科研究', text:'双月刊，追踪国内外哲学社会科学的新学派、新观点与新成果，关注学术理论、研究方法、跨学科研究与发展趋势。涵盖哲学、政治学、经济学、法学、社会学、历史学与文化学等领域，适合研究者及深度爱好者。', links:[['期刊入口','https://www.ncpssd.org/journal/secure/details?params=cjRab3Z0b2l2MG13SGpQekNFdUxXZkVJUE8yTmpKZDFHMElFUUNUR0MyWT0']] },
+];
+---
+<SiteLayout title="高认知杂志推荐" description="从科技前沿到社会文化，发现值得深入阅读的杂志与知识平台。">
+  <section class="magazine-heading page-shell"><span>READ DEEPLY · THINK BROADLY</span><h1>高认知杂志推荐</h1><p>从科技前沿到社会文化，从全球财经到人文社科。<br />为好奇心找到方向，为深度思考积累养分。</p><div>10 个阅读入口 · 科技 / 文化 / 财经 / 社科</div></section>
+  <section class="page-shell magazine-grid" aria-label="杂志推荐列表">{magazines.map((item,index)=><article class="magazine-card"><header><span class="number">{String(index+1).padStart(2,'0')}</span><span class="category">{item.category}</span></header><h2>{item.name}</h2><p>{item.text}</p><footer>{item.links.map(([label,url])=><a href={url} target="_blank" rel="noopener noreferrer">{label}<span aria-hidden="true"> ↗</span></a>)}</footer></article>)}</section>
+  <p class="page-shell magazine-note">根据《杂志推荐》文档整理。阅读入口包含杂志与知识服务平台，具体内容及订阅方式以各网站说明为准。</p>
+</SiteLayout>
+<style>
+  .magazine-heading{padding-block:60px 38px}.magazine-heading>span{font-size:12px;letter-spacing:.18em;color:#96782f;font-weight:700}.magazine-heading h1{font-size:clamp(30px,5vw,48px);color:#095638;margin:14px 0 20px}.magazine-heading p{line-height:1.9;color:#52665b;font-size:17px}.magazine-heading>div{margin-top:24px;font-size:13px;color:#6b7b71}.magazine-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.magazine-card{background:#fff;border:1px solid #dfe7e1;border-top:3px solid #16734d;border-radius:12px;padding:28px;display:flex;flex-direction:column;min-width:0}.magazine-card header{display:flex;justify-content:space-between;align-items:center;gap:16px}.number{font-size:28px;color:#b69a58;font-family:Georgia,serif}.category{font-size:12px;color:#166b47;background:#edf5ef;padding:5px 12px;border-radius:20px}.magazine-card h2{font-size:23px;line-height:1.5;color:#154d35;margin:18px 0 14px}.magazine-card p{color:#53675b;line-height:1.95;margin:0 0 24px}.magazine-card footer{display:flex;gap:20px;flex-wrap:wrap;margin-top:auto;padding-top:18px;border-top:1px solid #e7ede8}.magazine-card a{color:#0b683f;font-weight:600;font-size:14px}.magazine-note{padding-block:28px 52px;font-size:12px;color:#6b7b71;line-height:1.8}@media(max-width:760px){.magazine-grid{grid-template-columns:1fr}.magazine-card{padding:22px}.magazine-heading{padding-top:36px}}
+</style>
