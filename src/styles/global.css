@@ -45,7 +45,7 @@ img { display: block; max-width: 100%; }
 .menu-toggle { display: none; border: 0; background: transparent; color: var(--green-800); width: 44px; height: 44px; place-items: center; }
 .menu-toggle .material-symbols-outlined { font-size: 30px; }
 .main-nav { background: var(--green-700); color: #fff; }
-.nav-inner { display: grid; grid-template-columns: repeat(8, 1fr); }
+.nav-inner { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
 .nav-inner a { min-height: 40px; display: grid; place-items: center; font-weight: 600; position: relative; }
 .nav-inner a::after { content: ''; position: absolute; bottom: 0; width: 0; height: 3px; background: #fff; transition: width .2s; }
 .nav-inner a:hover::after, .nav-inner a.active::after { width: 46px; }
