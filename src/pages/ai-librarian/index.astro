@@ -11,9 +11,17 @@ const services = [
 <SiteLayout title="AI馆员" description="东莞城市学院图书馆 AI 馆员：咨询、馆藏查询与电子书检索" active="ai-librarian">
   <InnerHero eyebrow="AI LIBRARIAN" title="AI馆员" description="从一个问题开始，发现适合您的图书与学习资源。" icon="smart_toy" />
   <section class="inner-section page-shell">
+    <section aria-label="在线咨询 AI 馆员" style="margin-bottom:30px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px">
+        <h2 style="margin:0">与 AI 馆员对话</h2>
+        <a href="/libai/web/" target="_blank" rel="noopener noreferrer">独立窗口打开 ↗</a>
+      </div>
+      <iframe src="/libai/web/" title="东莞城市学院图书馆 AI 馆员" loading="lazy" style="display:block;width:100%;height:760px;height:min(820px,90dvh);min-height:480px;border:1px solid #dfe6e3;border-radius:16px;background:#fff;"></iframe>
+      <p style="color:#63776b;font-size:13px;line-height:1.8">无需企业微信登录。问题与必要上下文将发送至服务端及模型服务商；公开接口不保存对话正文。校园网共用出口可能共享使用额度。</p>
+    </section>
     <div class="panel" style="padding:28px;margin-bottom:26px">
       <h2>东莞城市学院图书馆 AI 馆员</h2>
-      <p style="line-height:1.9">面向读者提供远程图书馆咨询、实时纸质馆藏与双平台电子书检索。通过支持技能的 AI 助手使用，无需学校账号、企业微信登录、API Key 或本地大模型配置。</p>
+      <p style="line-height:1.9">面向读者提供远程图书馆咨询、实时纸质馆藏与双平台电子书检索。您可以直接在本页对话，也可通过支持技能的 AI 助手使用，无需企业微信登录或配置 API Key。</p>
     </div>
     <div class="service-cards">{services.map(service => <article class="service-card">
       <span class="material-symbols-outlined">{service.icon}</span><h2>{service.title}</h2><p>{service.text}</p>
@@ -21,6 +29,8 @@ const services = [
     </article>)}</div>
     <div class="panel prose" style="padding:28px;margin-top:26px">
       <h2>如何使用</h2>
+      <p>在上方对话框输入问题或检索词即可开始咨询。支持最多三轮上下文，会话保存在当前标签页；点击“新对话”可清除。单次请求最长等待 110 秒，失败时可使用对话框内的重试按钮。</p>
+      <h3>在其他 AI 助手中使用技能</h3>
       <ol><li>在支持 Skill 的 AI 助手中安装“东莞城市学院图书馆 AI 馆员”技能。</li><li>输入问题、书名、作者、ISBN 或主题词，例如“帮我找人工智能方面的书”。</li><li>根据检索结果查看索书号、馆藏地点、可借情况或电子书阅读链接。</li></ol>
       <p><a href="https://skillhub.cn/skills/indiv-dgcu/dgcu-library-librarian" target="_blank" rel="noopener noreferrer">查看技能详情与安装方式 ↗</a>　<a href="https://github.com/chenxianlong/dgcu-library-librarian-skill" target="_blank" rel="noopener noreferrer">开源项目与使用说明 ↗</a></p>
       <h2>使用提示</h2>
